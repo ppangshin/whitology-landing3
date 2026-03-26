@@ -137,14 +137,15 @@
   }
   .problem-img-wrap { position: relative; }
   .problem-img-box {
-    width: 100%; aspect-ratio: 16/9;
+    width: 75%; aspect-ratio: 3/4;
+    margin: 0 auto;
     background: #e8e3d8;
     border: 1px dashed rgba(0,0,0,0.12);
     display: flex; flex-direction: column;
     align-items: center; justify-content: center; gap: 12px;
     position: relative; overflow: hidden;
   }
-  .problem-img-box img { width: 100%; height: 100%; object-fit: contain; position: absolute; top:0; left:0; background: #e8e3d8; }
+  .problem-img-box img { width: 100%; height: 100%; object-fit: cover; object-position: center; position: absolute; top:0; left:0; }
   .problem-img-box .ph-icon { font-size: 28px; opacity: 0.2; }
   .problem-img-box .ph-label { font-size: 11px; letter-spacing: 2px; color: rgba(0,0,0,0.2); text-align: center; line-height: 1.8; }
   .img-caption-tag {
@@ -188,9 +189,12 @@
     background: #f5f0e8; padding: 100px 48px;
     display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
   }
-  .showcase-img-col { display: flex; gap: 16px; align-items: flex-end; }
+  .showcase-img-col {
+    position: relative;
+    display: block;
+  }
   .showcase-img-main {
-    flex: 2; aspect-ratio: 3/4;
+    width: 100%; aspect-ratio: 4/3;
     background: #e0dbd0;
     border: 1px dashed rgba(0,0,0,0.12);
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
@@ -198,9 +202,14 @@
   }
   .showcase-img-main img { width:100%; height:100%; object-fit: cover; position: absolute; top:0; left:0; }
   .showcase-img-sub {
-    flex: 1; aspect-ratio: 1/1; background: #d4f500;
+    position: absolute;
+    bottom: -20px; right: -20px;
+    width: 36%; aspect-ratio: 9/16;
+    background: #d4f500;
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
-    position: relative; overflow: hidden; margin-bottom: 40px;
+    overflow: hidden;
+    box-shadow: -4px 4px 20px rgba(0,0,0,0.15);
+    z-index: 2;
   }
   .showcase-img-sub img { width:100%; height:100%; object-fit: cover; position: absolute; top:0; left:0; }
   .showcase-img-sub .ph-icon { font-size: 20px; opacity: 0.3; }
@@ -305,14 +314,22 @@
     /* PROBLEM */
     .section-problem {
       grid-template-columns: 1fr;
-      padding: 56px 24px;
+      padding: 56px 0 0;
       gap: 32px;
     }
+    .problem-text { padding: 0 24px; }
     .section-problem h2 { font-size: 28px; }
     .problem-body { font-size: 14px; }
-    .problem-img-box { aspect-ratio: 16/9; }
+    .problem-img-wrap { width: 100%; max-width: 100%; margin-left: 0; padding: 0; }
+    .problem-img-box {
+      width: 100%;
+      aspect-ratio: 3/4;
+      border: none;
+      border-radius: 0;
+    }
+    .problem-img-box img { object-fit: cover; object-position: center; }
     .img-caption-tag {
-      bottom: -10px; right: -8px;
+      bottom: 12px; right: 12px;
       font-size: 11px; padding: 6px 12px;
     }
 
@@ -328,25 +345,30 @@
     /* SHOWCASE */
     .section-showcase {
       grid-template-columns: 1fr;
-      padding: 56px 24px;
+      padding: 56px 24px 56px;
       gap: 32px;
     }
     .showcase-img-col {
-      flex-direction: column;
-      gap: 12px;
-      align-items: stretch;
+      display: block;
+      position: relative;
+      margin-bottom: 20px;
     }
     .showcase-img-main {
-      flex: none;
       width: 100%;
       aspect-ratio: 4/3;
+      border: none;
     }
+    .showcase-img-main img { object-fit: cover; }
     .showcase-img-sub {
-      flex: none;
-      width: 100%;
-      aspect-ratio: 16/9;
+      position: absolute;
+      bottom: -16px; right: -8px;
+      width: 32%;
+      aspect-ratio: 9/16;
       margin-bottom: 0;
+      box-shadow: -3px 3px 14px rgba(0,0,0,0.15);
     }
+    .showcase-img-sub img { object-fit: cover; }
+    .showcase-text { padding: 0; }
     .showcase-text h2 { font-size: 30px; }
     .showcase-text p { font-size: 14px; }
 
@@ -420,7 +442,7 @@
         권장: 세로형 누끼 PNG (투명 배경)
       -->
       <img src="images/hero-device.jpeg" alt="Whitology 디바이스" style="width:100%;height:100%;object-fit:cover;display:block;">
-      <div class="hero-sticker-1">NEW 2026</div>
+      <div class="hero-sticker-1">NEW 2024</div>
       <div class="hero-sticker-2">진짜임</div>
     </div>
   </div>
@@ -543,7 +565,7 @@
 
 <footer>
   <div class="footer-brand">WHITOLOGY</div>
-  <div class="footer-note">© 2026 WHITOLOGY. ALL RIGHTS RESERVED.</div>
+  <div class="footer-note">© 2024 WHITOLOGY. ALL RIGHTS RESERVED.</div>
 </footer>
 
 <script>
