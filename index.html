@@ -501,78 +501,29 @@
     }
     .form-error.show { display: block; }
 
-    /* 개인정보 동의 체크박스 — 카드형 */
+    /* 개인정보 동의 체크박스 */
     .consent-label {
       display: flex;
-      align-items: center;
-      gap: 10px;
+      align-items: flex-start;
+      gap: 8px;
       font-size: 13px;
       color: var(--slate-600);
       cursor: pointer;
       line-height: 1.4;
-      padding: 12px 14px;
-      border: 2px solid #e2e8f0;
-      border-radius: 12px;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .consent-label:hover {
-      border-color: var(--indigo);
-      background: #f5f3ff;
-    }
-    .consent-label:has(input:checked) {
-      border-color: var(--indigo);
-      background: #ede9fe;
     }
     .consent-label input[type="checkbox"] {
-      appearance: none;
-      -webkit-appearance: none;
-      width: 22px;
-      height: 22px;
-      border: 2px solid #cbd5e1;
-      border-radius: 6px;
+      width: 18px;
+      height: 18px;
+      margin-top: 1px;
       flex-shrink: 0;
+      accent-color: var(--indigo);
       cursor: pointer;
-      position: relative;
-      transition: background 0.15s, border-color 0.15s;
-    }
-    .consent-label input[type="checkbox"]:checked {
-      background: var(--indigo);
-      border-color: var(--indigo);
-    }
-    .consent-label input[type="checkbox"]:checked::after {
-      content: '✓';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: var(--white);
-      font-size: 14px;
-      font-weight: 900;
-    }
-    .consent-label .tag-required {
-      background: var(--indigo);
-      color: var(--white);
-      font-size: 11px;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 999px;
-      flex-shrink: 0;
-    }
-    .consent-label .tag-optional {
-      background: #e2e8f0;
-      color: var(--slate-600);
-      font-size: 11px;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 999px;
-      flex-shrink: 0;
     }
     .consent-label a {
       color: var(--indigo);
       text-decoration: underline;
       font-weight: 700;
     }
-    .consent-label.error { border-color: var(--red); }
     .consent-label.error span { color: var(--red); }
 
     /* ── 개인정보 모달 ── */
@@ -1158,16 +1109,16 @@
         </div>
 
         <div class="form-fields">
-          <input type="tel" id="phone" autocomplete="off" placeholder="연락처 (01012345678)" required />
+          <input type="tel" id="phone" autocomplete="off" placeholder="연락처 (010-0000-0000)" required oninput="autoFormatPhone(this)" maxlength="13" />
           <label class="consent-label">
             <input type="checkbox" id="consent" />
-            <span class="tag-required">필수</span>
-            <span><a href="#" onclick="openPrivacy(); return false;">개인정보 수집·이용</a>에 동의합니다.</span>
+            
+            <span><a href="#" onclick="openPrivacy(); return false;">개인정보 수집·이용</a>에 동의합니다. (필수)</span>
           </label>
           <label class="consent-label">
             <input type="checkbox" id="marketing" />
-            <span class="tag-optional">선택</span>
-            <span><a href="#" onclick="openPrivacy(); return false;">마케팅 정보 수신</a>에 동의합니다.</span>
+            
+            <span><a href="#" onclick="openPrivacy(); return false;">마케팅 정보 수신</a>에 동의합니다. (선택)</span>
           </label>
           <p class="form-error" id="formError">입력 정보를 확인해 주세요.</p>
           <button class="btn-preorder" id="submitBtn" onclick="handlePreorder()">
@@ -1204,16 +1155,16 @@
         <p class="deal"><s>149,000원</s> → 44,700원</p>
       </div>
       <div class="form-fields">
-        <input type="tel" id="popupPhone" autocomplete="off" placeholder="연락처 (01012345678)" />
+        <input type="tel" id="popupPhone" autocomplete="off" placeholder="연락처 (010-0000-0000)" oninput="autoFormatPhone(this)" maxlength="13" />
         <label class="consent-label">
           <input type="checkbox" id="popupConsent" />
-          <span class="tag-required">필수</span>
-          <span><a href="#" onclick="openPrivacy(); return false;">개인정보 수집·이용</a>에 동의합니다.</span>
+          
+          <span><a href="#" onclick="openPrivacy(); return false;">개인정보 수집·이용</a>에 동의합니다. (필수)</span>
         </label>
         <label class="consent-label">
           <input type="checkbox" id="popupMarketing" />
-          <span class="tag-optional">선택</span>
-          <span><a href="#" onclick="openPrivacy(); return false;">마케팅 정보 수신</a>에 동의합니다.</span>
+          
+          <span><a href="#" onclick="openPrivacy(); return false;">마케팅 정보 수신</a>에 동의합니다. (선택)</span>
         </label>
         <p class="form-error" id="popupError">입력 정보를 확인해 주세요.</p>
         <button class="btn-preorder" id="popupSubmitBtn" onclick="handlePopupPreorder()">
@@ -1278,7 +1229,7 @@
     <div class="modal-box">
       <div class="modal-emoji">🎉</div>
       <h3>사전예약 완료!</h3>
-      <p>얼리버드 혜택이 확보되었습니다.<br>출시 시 입력하신 번호로 안내드릴게요.</p>
+      <p>사전예약이 완료되었습니다!<br>출시되면 가장 먼저 연락드릴게요.</p>
       <button class="modal-close" onclick="closeModal()">확인</button>
     </div>
   </div>
@@ -1406,7 +1357,23 @@
     }
 
     // ═══════════════════════════════════════════
-    // 전화번호 포맷 변환 (어떤 형식이든 → 010-0000-0000)
+    // 전화번호 자동 하이픈 입력
+    // ═══════════════════════════════════════════
+    function autoFormatPhone(input) {
+      const digits = input.value.replace(/\D/g, '');
+      let formatted = '';
+      if (digits.length <= 3) {
+        formatted = digits;
+      } else if (digits.length <= 7) {
+        formatted = digits.slice(0,3) + '-' + digits.slice(3);
+      } else {
+        formatted = digits.slice(0,3) + '-' + digits.slice(3,7) + '-' + digits.slice(7,11);
+      }
+      input.value = formatted;
+    }
+
+    // ═══════════════════════════════════════════
+    // 전화번호 포맷 변환 (저장용 → 010-0000-0000)
     // ═══════════════════════════════════════════
     function formatPhone(raw) {
       const digits = raw.replace(/\D/g, '');
