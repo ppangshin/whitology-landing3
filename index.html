@@ -305,21 +305,23 @@
       gap: 16px;
     }
     .why-img-col {
-      flex: 0 0 auto;
+      flex: 0 0 340px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
     .why-img-col img {
-      width: 320px;
-      max-width: 100%;
+      width: 100%;
+      height: 100%;
+      max-height: 480px;
       border-radius: 24px;
       border: 6px solid rgba(255,255,255,0.15);
       box-shadow: 16px 16px 0 var(--pink);
       object-fit: cover;
     }
     @media (min-width: 768px) {
-      .why-img-col img { height: 100%; width: 300px; }
+      .why-img-col { flex: 0 0 320px; }
+      .why-img-col img { height: auto; max-height: none; }
     }
 
     .why-card {
@@ -389,15 +391,15 @@
       scroll-margin-top: 20px;
     }
     .preorder-inner { max-width: 480px; margin: 0 auto; }
-    .preorder-hero-img {
+    .preorder-bottom-img {
+      margin-top: 32px;
       text-align: center;
-      margin-bottom: 28px;
     }
-    .preorder-hero-img img {
-      max-width: 260px;
+    .preorder-bottom-img img {
       width: 100%;
-      margin: 0 auto;
-      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.15));
+      max-width: 480px;
+      border-radius: 16px;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.12));
     }
     .preorder-form {
       background: var(--white);
@@ -683,7 +685,8 @@
       .why-section { padding: 48px 16px; }
       .why-section h2 { font-size: 28px; margin-bottom: 32px; }
       .why-layout { gap: 28px; }
-      .why-img-col img { width: 100%; max-width: 280px; border-radius: 18px; border-width: 4px; box-shadow: 10px 10px 0 var(--pink); }
+      .why-img-col { flex: 0 0 auto; }
+      .why-img-col img { width: 100%; max-width: 100%; max-height: 300px; border-radius: 18px; border-width: 4px; box-shadow: 10px 10px 0 var(--pink); }
       .why-grid { gap: 12px; }
       .why-card { padding: 20px 16px; gap: 12px; border-radius: 14px; }
       .why-card-icon { width: 38px; height: 38px; border-radius: 10px; }
@@ -698,7 +701,8 @@
       .review-card blockquote { font-size: 14px; line-height: 1.55; margin-bottom: 8px; }
       .review-card cite { font-size: 12px; }
       .preorder-section { padding: 44px 16px; }
-      .preorder-hero-img img { max-width: 200px; }
+      .preorder-bottom-img { margin-top: 24px; }
+      .preorder-bottom-img img { border-radius: 12px; }
       .preorder-form { padding: 28px 18px; border-width: 2px; box-shadow: 6px 6px 0 var(--indigo); border-radius: 20px; }
       .form-top h2 { font-size: 24px; }
       .form-top .deal { font-size: 15px; }
@@ -898,9 +902,6 @@
   <!-- 사전예약 폼 -->
   <section class="preorder-section" id="preorder-form">
     <div class="preorder-inner">
-      <div class="preorder-hero-img reveal">
-        <img src="images/Whitology3_Package.png" alt="Whitology 패키지" />
-      </div>
       <div class="preorder-form reveal">
         <div class="form-top">
           <h2>얼리버드 사전예약</h2>
@@ -910,15 +911,15 @@
         <!-- 혜택 단계 표시 -->
         <div class="tier-display" id="tierDisplay">
           <div class="tier-row" id="tier1" data-max="100">
-            <span>1~100번째</span>
+            <span>얼리버드 1차</span>
             <span>40% 할인</span>
           </div>
           <div class="tier-row" id="tier2" data-max="200">
-            <span>101~200번째</span>
+            <span>얼리버드 2차</span>
             <span>30% 할인</span>
           </div>
           <div class="tier-row" id="tier3" data-max="300">
-            <span>201~300번째</span>
+            <span>얼리버드 3차</span>
             <span>20% 할인</span>
           </div>
         </div>
@@ -942,10 +943,12 @@
           현재 <span class="num" id="preorder-count">260</span>명 사전예약 완료
         </div>
       </div>
+      <!-- 패키지 이미지 (폼 박스 아래, 같은 가로 너비) -->
+      <div class="preorder-bottom-img reveal">
+        <img src="images/Whitology3_Package.png" alt="Whitology 패키지" />
+      </div>
     </div>
   </section>
-
-  <!-- Footer -->
   <footer>
     <p class="logo">WHITOLOGY</p>
     <p class="copy">© 2026 Whitology Inc. All Rights Reserved.</p>
