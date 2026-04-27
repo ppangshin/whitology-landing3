@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Whitology – 사전예약 얼리버드 40% 할인</title>
+  <title>Whitology – 사전예약 얼리버드 70% 할인</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -307,21 +307,19 @@
     .why-img-col {
       flex: 0 0 340px;
       display: flex;
-      align-items: center;
+      align-items: stretch;
       justify-content: center;
     }
     .why-img-col img {
       width: 100%;
       height: 100%;
-      max-height: 480px;
       border-radius: 24px;
       border: 6px solid rgba(255,255,255,0.15);
       box-shadow: 16px 16px 0 var(--pink);
       object-fit: cover;
     }
     @media (min-width: 768px) {
-      .why-img-col { flex: 0 0 320px; }
-      .why-img-col img { height: auto; max-height: none; }
+      .why-img-col { flex: 0 0 360px; }
     }
 
     .why-card {
@@ -391,11 +389,11 @@
       scroll-margin-top: 20px;
     }
     .preorder-inner { max-width: 480px; margin: 0 auto; }
-    .preorder-bottom-img {
-      margin-top: 32px;
+    .preorder-top-img {
       text-align: center;
+      margin-bottom: 28px;
     }
-    .preorder-bottom-img img {
+    .preorder-top-img img {
       width: 100%;
       max-width: 480px;
       border-radius: 16px;
@@ -701,8 +699,8 @@
       .review-card blockquote { font-size: 14px; line-height: 1.55; margin-bottom: 8px; }
       .review-card cite { font-size: 12px; }
       .preorder-section { padding: 44px 16px; }
-      .preorder-bottom-img { margin-top: 24px; }
-      .preorder-bottom-img img { border-radius: 12px; }
+      .preorder-top-img { margin-bottom: 20px; }
+      .preorder-top-img img { border-radius: 12px; }
       .preorder-form { padding: 28px 18px; border-width: 2px; box-shadow: 6px 6px 0 var(--indigo); border-radius: 20px; }
       .form-top h2 { font-size: 24px; }
       .form-top .deal { font-size: 15px; }
@@ -750,10 +748,10 @@
   <!-- Urgency Ticker -->
   <div class="urgency-banner">
     <div class="ticker-wrap">
-      <span class="ticker-item">🔥 얼리버드 사전예약 40% 할인 — 선착순 300명 한정</span>
+      <span class="ticker-item">🔥 얼리버드 사전예약 70% 할인 — 선착순 300명 한정</span>
       <span class="ticker-item">⏰ 사전예약 마감까지 얼마 남지 않았습니다</span>
       <span class="ticker-item">🎁 사전예약 시 7일 체험 키트 무료 증정</span>
-      <span class="ticker-item">🔥 얼리버드 사전예약 40% 할인 — 선착순 300명 한정</span>
+      <span class="ticker-item">🔥 얼리버드 사전예약 70% 할인 — 선착순 300명 한정</span>
       <span class="ticker-item">⏰ 사전예약 마감까지 얼마 남지 않았습니다</span>
       <span class="ticker-item">🎁 사전예약 시 7일 체험 키트 무료 증정</span>
     </div>
@@ -902,25 +900,25 @@
   <!-- 사전예약 폼 -->
   <section class="preorder-section" id="preorder-form">
     <div class="preorder-inner">
+      <!-- 패키지 이미지 (폼 박스 위, 같은 가로 너비) -->
+      <div class="preorder-top-img reveal">
+        <img src="images/Whitology3_Package.png" alt="Whitology 패키지" />
+      </div>
       <div class="preorder-form reveal">
         <div class="form-top">
           <h2>얼리버드 사전예약</h2>
-          <p class="deal"><s>149,000원</s> → 89,000원</p>
+          <p class="deal"><s>149,000원</s> → 44,700원</p>
         </div>
 
         <!-- 혜택 단계 표시 -->
         <div class="tier-display" id="tierDisplay">
           <div class="tier-row" id="tier1" data-max="100">
             <span>얼리버드 1차</span>
-            <span>40% 할인</span>
+            <span>80% 할인</span>
           </div>
           <div class="tier-row" id="tier2" data-max="200">
             <span>얼리버드 2차</span>
-            <span>30% 할인</span>
-          </div>
-          <div class="tier-row" id="tier3" data-max="300">
-            <span>얼리버드 3차</span>
-            <span>20% 할인</span>
+            <span>70% 할인</span>
           </div>
         </div>
 
@@ -942,10 +940,6 @@
           <span class="live-dot"></span>
           현재 <span class="num" id="preorder-count">260</span>명 사전예약 완료
         </div>
-      </div>
-      <!-- 패키지 이미지 (폼 박스 아래, 같은 가로 너비) -->
-      <div class="preorder-bottom-img reveal">
-        <img src="images/Whitology3_Package.png" alt="Whitology 패키지" />
       </div>
     </div>
   </section>
@@ -1081,22 +1075,16 @@
       const tiers = [
         document.getElementById('tier1'),
         document.getElementById('tier2'),
-        document.getElementById('tier3'),
       ];
-      tiers.forEach(t => { t.className = 'tier-row'; });
+      tiers.forEach(t => { if (t) t.className = 'tier-row'; });
 
       if (count < 100) {
         tiers[0].classList.add('active');
-        tiers[0].querySelector('span:last-child').innerHTML = '40% 할인 <span class="tier-badge">지금</span>';
-      } else if (count < 200) {
-        tiers[0].classList.add('done');
-        tiers[1].classList.add('active');
-        tiers[1].querySelector('span:last-child').innerHTML = '30% 할인 <span class="tier-badge">지금</span>';
+        tiers[0].querySelector('span:last-child').innerHTML = '80% 할인 <span class="tier-badge">지금</span>';
       } else {
         tiers[0].classList.add('done');
-        tiers[1].classList.add('done');
-        tiers[2].classList.add('active');
-        tiers[2].querySelector('span:last-child').innerHTML = '20% 할인 <span class="tier-badge">지금</span>';
+        tiers[1].classList.add('active');
+        tiers[1].querySelector('span:last-child').innerHTML = '70% 할인 <span class="tier-badge">지금</span>';
       }
     }
 
