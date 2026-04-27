@@ -501,6 +501,147 @@
     }
     .form-error.show { display: block; }
 
+    /* 개인정보 동의 체크박스 — 카드형 */
+    .consent-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--slate-600);
+      cursor: pointer;
+      line-height: 1.4;
+      padding: 12px 14px;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .consent-label:hover {
+      border-color: var(--indigo);
+      background: #f5f3ff;
+    }
+    .consent-label:has(input:checked) {
+      border-color: var(--indigo);
+      background: #ede9fe;
+    }
+    .consent-label input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 22px;
+      height: 22px;
+      border: 2px solid #cbd5e1;
+      border-radius: 6px;
+      flex-shrink: 0;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .consent-label input[type="checkbox"]:checked {
+      background: var(--indigo);
+      border-color: var(--indigo);
+    }
+    .consent-label input[type="checkbox"]:checked::after {
+      content: '✓';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 900;
+    }
+    .consent-label .tag-required {
+      background: var(--indigo);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+    .consent-label .tag-optional {
+      background: #e2e8f0;
+      color: var(--slate-600);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      flex-shrink: 0;
+    }
+    .consent-label a {
+      color: var(--indigo);
+      text-decoration: underline;
+      font-weight: 700;
+    }
+    .consent-label.error { border-color: var(--red); }
+    .consent-label.error span { color: var(--red); }
+
+    /* ── 개인정보 모달 ── */
+    .privacy-modal-box {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 40px 28px;
+      max-width: 500px;
+      width: 100%;
+      border: 3px solid var(--black);
+      box-shadow: 10px 10px 0 var(--indigo);
+      position: relative;
+      text-align: left;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+    .privacy-title {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--indigo-900);
+      margin-bottom: 10px;
+    }
+    .privacy-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--slate-600);
+      margin-bottom: 14px;
+    }
+    .privacy-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 14px;
+      font-size: 13px;
+    }
+    .privacy-table th,
+    .privacy-table td {
+      border: 1px solid #e2e8f0;
+      padding: 10px 12px;
+      text-align: left;
+      line-height: 1.5;
+    }
+    .privacy-table th {
+      background: var(--slate-50);
+      font-weight: 700;
+      color: var(--slate-600);
+      width: 35%;
+    }
+    .privacy-table td {
+      color: var(--black);
+    }
+    .privacy-note {
+      font-size: 12px;
+      color: var(--slate-500);
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+    .privacy-divider {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      margin: 20px 0;
+    }
+    @media (max-width: 767px) {
+      .privacy-modal-box { padding: 32px 20px; border-radius: 20px; max-height: 80vh; }
+      .privacy-title { font-size: 15px; }
+      .privacy-table { font-size: 12px; }
+      .privacy-table th, .privacy-table td { padding: 8px 10px; }
+    }
+
     /* ── 사전예약 팝업 모달 ── */
     .popup-overlay {
       display: none;
@@ -1017,13 +1158,23 @@
         </div>
 
         <div class="form-fields">
-          <input type="email" id="email" autocomplete="off" placeholder="이메일 주소를 입력하세요" required />
-          <p class="form-error" id="formError">이메일 주소를 입력해 주세요.</p>
+          <input type="tel" id="phone" autocomplete="off" placeholder="연락처 (01012345678)" required />
+          <label class="consent-label">
+            <input type="checkbox" id="consent" />
+            <span class="tag-required">필수</span>
+            <span><a href="#" onclick="openPrivacy(); return false;">개인정보 수집·이용</a>에 동의합니다.</span>
+          </label>
+          <label class="consent-label">
+            <input type="checkbox" id="marketing" />
+            <span class="tag-optional">선택</span>
+            <span><a href="#" onclick="openPrivacy(); return false;">마케팅 정보 수신</a>에 동의합니다.</span>
+          </label>
+          <p class="form-error" id="formError">입력 정보를 확인해 주세요.</p>
           <button class="btn-preorder" id="submitBtn" onclick="handlePreorder()">
             사전예약 신청 →
           </button>
         </div>
-        <p class="form-note">이메일 하나면 사전예약 완료! 출시 소식을 가장 먼저 받아보세요.</p>
+        <p class="form-note">출시 소식을 가장 먼저 받아보세요.</p>
         <div class="form-counter">
           <span class="live-dot"></span>
           현재 <span class="num" id="preorder-count">260</span>명 사전예약 완료
@@ -1036,7 +1187,7 @@
     <p class="copy">© 2026 Whitology Inc. All Rights Reserved.</p>
     <div class="links">
       <a href="#">이용약관</a>
-      <a href="#">개인정보처리방침</a>
+      <a href="#" onclick="openPrivacy(); return false;">개인정보처리방침</a>
       <a href="#">고객센터</a>
     </div>
   </footer>
@@ -1053,13 +1204,72 @@
         <p class="deal"><s>149,000원</s> → 44,700원</p>
       </div>
       <div class="form-fields">
-        <input type="email" id="popupEmail" autocomplete="off" placeholder="이메일 주소를 입력하세요" />
-        <p class="form-error" id="popupError">이메일 주소를 입력해 주세요.</p>
+        <input type="tel" id="popupPhone" autocomplete="off" placeholder="연락처 (01012345678)" />
+        <label class="consent-label">
+          <input type="checkbox" id="popupConsent" />
+          <span class="tag-required">필수</span>
+          <span><a href="#" onclick="openPrivacy(); return false;">개인정보 수집·이용</a>에 동의합니다.</span>
+        </label>
+        <label class="consent-label">
+          <input type="checkbox" id="popupMarketing" />
+          <span class="tag-optional">선택</span>
+          <span><a href="#" onclick="openPrivacy(); return false;">마케팅 정보 수신</a>에 동의합니다.</span>
+        </label>
+        <p class="form-error" id="popupError">입력 정보를 확인해 주세요.</p>
         <button class="btn-preorder" id="popupSubmitBtn" onclick="handlePopupPreorder()">
           사전예약 신청 →
         </button>
       </div>
-      <p class="form-note">이메일 하나면 사전예약 완료! 출시 소식을 가장 먼저 받아보세요.</p>
+      <p class="form-note">출시 소식을 가장 먼저 받아보세요.</p>
+    </div>
+  </div>
+
+  <!-- 개인정보 수집·이용 동의 모달 -->
+  <div class="modal-overlay" id="privacyModal">
+    <div class="privacy-modal-box">
+      <button class="popup-close" onclick="closePrivacy()">✕</button>
+
+      <!-- [필수] 개인정보 수집·이용 동의 -->
+      <h3 class="privacy-title">[필수] 개인정보 수집·이용 동의</h3>
+      <p class="privacy-desc">
+        Whitology(이하 '회사')는 사전예약 서비스 제공을 위해 아래와 같이 개인정보를 수집·이용합니다.
+      </p>
+      <table class="privacy-table">
+        <tr><th>항목</th><th>내용</th></tr>
+        <tr><td>수집 항목</td><td>휴대전화번호</td></tr>
+        <tr><td>수집·이용 목적</td><td>사전예약 접수 및 출시 안내 발송</td></tr>
+        <tr><td>보유·이용 기간</td><td>사전예약 서비스 종료 또는 출시 안내 발송 후 즉시 파기</td></tr>
+      </table>
+      <p class="privacy-note">
+        귀하는 개인정보 수집·이용에 대한 동의를 거부할 권리가 있으며, 거부 시 사전예약 신청이 제한됩니다.
+      </p>
+
+      <hr class="privacy-divider" />
+
+      <!-- [선택] 마케팅 정보 수신 동의 -->
+      <h3 class="privacy-title">[선택] 마케팅 정보 수신 동의</h3>
+      <table class="privacy-table">
+        <tr><th>항목</th><th>내용</th></tr>
+        <tr><td>수집 항목</td><td>휴대전화번호</td></tr>
+        <tr><td>수집·이용 목적</td><td>신제품·이벤트·프로모션 정보 안내 (SMS/카카오 알림톡)</td></tr>
+        <tr><td>보유·이용 기간</td><td>동의 철회 시까지</td></tr>
+      </table>
+      <p class="privacy-note">
+        동의를 거부하셔도 사전예약 신청이 가능합니다. 언제든 수신 거부하실 수 있습니다.
+      </p>
+
+      <hr class="privacy-divider" />
+
+      <!-- 문의 -->
+      <h3 class="privacy-title">개인정보 보호 문의</h3>
+      <p class="privacy-desc">
+        수집된 개인정보 관련 문의 및 열람·정정·삭제·처리정지 요청은 아래로 연락 주시기 바랍니다.
+      </p>
+      <p class="privacy-desc">
+        이메일: <a href="mailto:whitologybiz@gmail.com" style="color: var(--indigo); font-weight: 700;">whitologybiz@gmail.com</a>
+      </p>
+
+      <button class="modal-close" onclick="closePrivacy()" style="margin-top: 24px; width: 100%;">확인</button>
     </div>
   </div>
 
@@ -1068,7 +1278,7 @@
     <div class="modal-box">
       <div class="modal-emoji">🎉</div>
       <h3>사전예약 완료!</h3>
-      <p>얼리버드 혜택이 확보되었습니다.<br>출시 시 입력하신 이메일로 안내드릴게요.</p>
+      <p>얼리버드 혜택이 확보되었습니다.<br>출시 시 입력하신 번호로 안내드릴게요.</p>
       <button class="modal-close" onclick="closeModal()">확인</button>
     </div>
   </div>
@@ -1196,31 +1406,65 @@
     }
 
     // ═══════════════════════════════════════════
-    // 4) 사전예약 제출 (reservations 테이블)
-    //    email만 필수, name/phone/gender는 NULL
+    // 전화번호 포맷 변환 (어떤 형식이든 → 010-0000-0000)
+    // ═══════════════════════════════════════════
+    function formatPhone(raw) {
+      const digits = raw.replace(/\D/g, '');
+      if (digits.length === 11) {
+        return digits.slice(0,3) + '-' + digits.slice(3,7) + '-' + digits.slice(7);
+      }
+      if (digits.length === 10) {
+        return digits.slice(0,3) + '-' + digits.slice(3,6) + '-' + digits.slice(6);
+      }
+      return null; // 유효하지 않은 번호
+    }
+
+    // ═══════════════════════════════════════════
+    // 개인정보 모달
+    // ═══════════════════════════════════════════
+    function openPrivacy() {
+      document.getElementById('privacyModal').classList.add('active');
+    }
+    function closePrivacy() {
+      document.getElementById('privacyModal').classList.remove('active');
+    }
+
+    // ═══════════════════════════════════════════
+    // 4) 사전예약 제출 — 하단 폼
     // ═══════════════════════════════════════════
     async function handlePreorder() {
-      const emailInput = document.getElementById('email');
-      const email = emailInput.value.trim();
+      const phoneInput = document.getElementById('phone');
+      const consentBox = document.getElementById('consent');
+      const consentLabel = consentBox.closest('.consent-label');
+      const phone = phoneInput.value.trim();
       const btn = document.getElementById('submitBtn');
       const errorEl = document.getElementById('formError');
 
-      // 에러 초기화
-      emailInput.classList.remove('error');
+      phoneInput.classList.remove('error');
+      consentLabel.classList.remove('error');
       errorEl.classList.remove('show');
 
-      if (!email) {
-        emailInput.classList.add('error');
-        errorEl.textContent = '이메일 주소를 입력해 주세요.';
+      if (!phone) {
+        phoneInput.classList.add('error');
+        errorEl.textContent = '연락처를 입력해 주세요.';
         errorEl.classList.add('show');
-        emailInput.focus();
+        phoneInput.focus();
         return;
       }
-      if (!email.includes('@')) {
-        emailInput.classList.add('error');
-        errorEl.textContent = '올바른 이메일 형식을 입력해 주세요.';
+
+      const formatted = formatPhone(phone);
+      if (!formatted) {
+        phoneInput.classList.add('error');
+        errorEl.textContent = '올바른 전화번호를 입력해 주세요.';
         errorEl.classList.add('show');
-        emailInput.focus();
+        phoneInput.focus();
+        return;
+      }
+
+      if (!consentBox.checked) {
+        consentLabel.classList.add('error');
+        errorEl.textContent = '개인정보 수집·이용에 동의해 주세요.';
+        errorEl.classList.add('show');
         return;
       }
 
@@ -1231,7 +1475,7 @@
         const res = await supaFetch('reservations', {
           method: 'POST',
           prefer: 'return=minimal',
-          body: { email: email },
+          body: { phone: formatted },
         });
 
         if (res.ok) {
@@ -1239,22 +1483,19 @@
           currentCount++;
           updateUI(currentCount);
         } else {
-          const err = await res.json();
-          if (res.status === 409 || err.code === '23505') {
-            // 중복이어도 성공으로 처리
-          } else {
-            console.warn('Supabase 오류 (무시):', err);
-          }
+          console.warn('Supabase 오류 (무시)');
         }
       } catch (e) {
         console.warn('Supabase 연결 실패 (무시):', e);
       }
 
-      // Supabase 성공/실패 관계없이 성공 화면
       document.getElementById('successModal').classList.add('active');
-      emailInput.value = '';
-      // 팝업 이메일도 초기화
-      document.getElementById('popupEmail').value = '';
+      phoneInput.value = '';
+      consentBox.checked = false;
+      document.getElementById('marketing').checked = false;
+      document.getElementById('popupPhone').value = '';
+      document.getElementById('popupConsent').checked = false;
+      document.getElementById('popupMarketing').checked = false;
       btn.disabled = false;
       btn.textContent = '사전예약 신청 →';
     }
@@ -1265,13 +1506,14 @@
     function openPopup(buttonName) {
       trackClick(buttonName || 'popup_cta');
       document.getElementById('popupModal').classList.add('active');
-      setTimeout(() => document.getElementById('popupEmail').focus(), 200);
+      setTimeout(() => document.getElementById('popupPhone').focus(), 200);
     }
 
     function closePopup() {
       document.getElementById('popupModal').classList.remove('active');
-      // 에러 초기화
-      document.getElementById('popupEmail').classList.remove('error');
+      document.getElementById('popupPhone').classList.remove('error');
+      var cl = document.getElementById('popupConsent').closest('.consent-label');
+      if (cl) cl.classList.remove('error');
       document.getElementById('popupError').classList.remove('show');
     }
 
@@ -1281,26 +1523,38 @@
     });
 
     async function handlePopupPreorder() {
-      const emailInput = document.getElementById('popupEmail');
-      const email = emailInput.value.trim();
+      const phoneInput = document.getElementById('popupPhone');
+      const consentBox = document.getElementById('popupConsent');
+      const consentLabel = consentBox.closest('.consent-label');
+      const phone = phoneInput.value.trim();
       const btn = document.getElementById('popupSubmitBtn');
       const errorEl = document.getElementById('popupError');
 
-      emailInput.classList.remove('error');
+      phoneInput.classList.remove('error');
+      consentLabel.classList.remove('error');
       errorEl.classList.remove('show');
 
-      if (!email) {
-        emailInput.classList.add('error');
-        errorEl.textContent = '이메일 주소를 입력해 주세요.';
+      if (!phone) {
+        phoneInput.classList.add('error');
+        errorEl.textContent = '연락처를 입력해 주세요.';
         errorEl.classList.add('show');
-        emailInput.focus();
+        phoneInput.focus();
         return;
       }
-      if (!email.includes('@')) {
-        emailInput.classList.add('error');
-        errorEl.textContent = '올바른 이메일 형식을 입력해 주세요.';
+
+      const formatted = formatPhone(phone);
+      if (!formatted) {
+        phoneInput.classList.add('error');
+        errorEl.textContent = '올바른 전화번호를 입력해 주세요.';
         errorEl.classList.add('show');
-        emailInput.focus();
+        phoneInput.focus();
+        return;
+      }
+
+      if (!consentBox.checked) {
+        consentLabel.classList.add('error');
+        errorEl.textContent = '개인정보 수집·이용에 동의해 주세요.';
+        errorEl.classList.add('show');
         return;
       }
 
@@ -1311,7 +1565,7 @@
         const res = await supaFetch('reservations', {
           method: 'POST',
           prefer: 'return=minimal',
-          body: { email: email },
+          body: { phone: formatted },
         });
 
         if (res.ok) {
@@ -1319,23 +1573,20 @@
           currentCount++;
           updateUI(currentCount);
         } else {
-          const err = await res.json();
-          if (res.status === 409 || err.code === '23505') {
-            // 중복이어도 성공으로 처리
-          } else {
-            console.warn('Supabase 오류 (무시):', err);
-          }
+          console.warn('Supabase 오류 (무시)');
         }
       } catch (e) {
         console.warn('Supabase 연결 실패 (무시):', e);
       }
 
-      // Supabase 성공/실패 관계없이 성공 화면
       closePopup();
       document.getElementById('successModal').classList.add('active');
-      emailInput.value = '';
-      // 하단 폼 이메일도 초기화
-      document.getElementById('email').value = '';
+      phoneInput.value = '';
+      consentBox.checked = false;
+      document.getElementById('popupMarketing').checked = false;
+      document.getElementById('phone').value = '';
+      document.getElementById('consent').checked = false;
+      document.getElementById('marketing').checked = false;
       btn.disabled = false;
       btn.textContent = '사전예약 신청 →';
     }
@@ -1343,21 +1594,13 @@
     // ═══════════════════════════════════════════
     // Toast 알림 (사회적 증거)
     // ═══════════════════════════════════════════
-    const fakeNames = [
-      '김*현', '이*영', '박*수', '최*아', '정*호',
-      '강*민', '윤*진', '장*우', '한*은', '오*준',
-      '서*연', '임*빈', '송*라', '신*혁', '배*솔'
-    ];
-    const fakeTimestamps = ['방금 전', '1분 전', '2분 전', '3분 전', '5분 전'];
-
     function showToast() {
       const container = document.getElementById('toastContainer');
-      const name = fakeNames[Math.floor(Math.random() * fakeNames.length)];
-      const time = fakeTimestamps[Math.floor(Math.random() * fakeTimestamps.length)];
+      const count = (currentCount + BASE_COUNT) + Math.floor(Math.random() * 3);
 
       const toast = document.createElement('div');
       toast.className = 'toast';
-      toast.innerHTML = `<span class="toast-dot"></span>${name}님이 사전예약했습니다 · ${time}`;
+      toast.innerHTML = `<span class="toast-dot"></span>🎉 ${count}번째 사전예약 완료!`;
 
       container.appendChild(toast);
       setTimeout(() => toast.classList.add('show'), 50);
@@ -1406,7 +1649,7 @@
     function scrollToForm(buttonName) {
       trackClick(buttonName || 'unknown_cta');
       document.getElementById('preorder-form').scrollIntoView({ behavior: 'smooth' });
-      setTimeout(() => document.getElementById('email').focus(), 600);
+      setTimeout(() => document.getElementById('phone').focus(), 600);
     }
 
     function closeModal() {
