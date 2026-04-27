@@ -904,12 +904,43 @@
       footer .logo { font-size: 20px; }
       footer .copy { font-size: 12px; margin-bottom: 12px; }
       footer .links { gap: 14px; font-size: 12px; flex-wrap: wrap; }
-      .modal-overlay { padding: 20px; }
-      .modal-box { padding: 36px 24px; border-radius: 20px; border-width: 2px; box-shadow: 7px 7px 0 var(--indigo); }
+      .modal-overlay { padding: 16px; }
+      .modal-box { padding: 32px 20px; border-radius: 20px; border-width: 2px; box-shadow: 7px 7px 0 var(--indigo); }
       .modal-emoji { font-size: 44px; margin-bottom: 12px; }
-      .modal-box h3 { font-size: 24px; margin-bottom: 10px; }
+      .modal-box h3 { font-size: 22px; margin-bottom: 10px; }
       .modal-box p { font-size: 14px; }
       .modal-close { padding: 12px 32px; font-size: 15px; min-height: 48px; }
+      /* 사전예약 팝업 모바일 */
+      .popup-overlay { padding: 16px; }
+      .popup-box {
+        padding: 28px 18px;
+        border-radius: 20px;
+        border-width: 2px;
+        box-shadow: 7px 7px 0 var(--indigo);
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+      .popup-close { top: 12px; right: 12px; font-size: 20px; }
+      .popup-box .form-top h2 { font-size: 22px; }
+      .popup-box .form-fields input { font-size: 16px; min-height: 48px; padding: 12px 14px; }
+      .popup-box .btn-preorder { font-size: 18px; padding: 14px; min-height: 52px; }
+      .popup-box .form-note { font-size: 11px; }
+      /* 체크박스 모바일 */
+      .consent-label { font-size: 12px; gap: 6px; }
+      .consent-label input[type="checkbox"] { width: 16px; height: 16px; }
+      /* 개인정보 모달 모바일 */
+      .privacy-modal-box {
+        padding: 28px 18px;
+        border-radius: 20px;
+        border-width: 2px;
+        box-shadow: 7px 7px 0 var(--indigo);
+        max-height: 80vh;
+      }
+      .privacy-title { font-size: 14px; }
+      .privacy-desc { font-size: 12px; }
+      .privacy-table { font-size: 12px; }
+      .privacy-table th, .privacy-table td { padding: 8px 10px; }
+      .privacy-note { font-size: 11px; }
     }
     @media (max-width: 374px) {
       .hero h1 { font-size: 36px; }
@@ -921,6 +952,13 @@
       .form-top h2 { font-size: 22px; }
       .cd-box { min-width: 42px; padding: 6px 8px; }
       .cd-num { font-size: 20px; }
+      .popup-box { padding: 24px 14px; }
+      .popup-box .form-top h2 { font-size: 20px; }
+      .popup-box .btn-preorder { font-size: 16px; }
+      .consent-label { font-size: 11px; }
+      .privacy-modal-box { padding: 24px 14px; }
+      .privacy-title { font-size: 13px; }
+      .privacy-table { font-size: 11px; }
     }
   </style>
 </head>
