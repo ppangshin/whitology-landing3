@@ -509,12 +509,14 @@
       font-size: 13px;
       color: var(--slate-600);
       cursor: pointer;
-      line-height: 1.4;
+      line-height: 1.5;
+      word-break: keep-all;
     }
     .consent-label input[type="checkbox"] {
       width: 18px;
       height: 18px;
-      margin-top: 1px;
+      min-width: 18px;
+      margin-top: 2px;
       flex-shrink: 0;
       accent-color: var(--indigo);
       cursor: pointer;
@@ -602,18 +604,23 @@
       z-index: 2000;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 16px;
+      overflow-y: auto;
     }
     .popup-overlay.active { display: flex; }
     .popup-box {
       background: var(--white);
-      border-radius: 24px;
-      padding: 40px 28px;
-      max-width: 420px;
-      width: 100%;
-      border: 3px solid var(--black);
-      box-shadow: 10px 10px 0 var(--indigo);
+      border-radius: 20px;
+      padding: 32px 20px;
+      max-width: 400px;
+      width: calc(100% - 16px);
+      border: 2px solid var(--black);
+      box-shadow: 6px 6px 0 var(--indigo);
       position: relative;
+      max-height: calc(100dvh - 32px);
+      max-height: calc(100vh - 32px);
+      overflow-y: auto;
+      margin: auto;
     }
     .popup-close {
       position: absolute;
@@ -635,16 +642,16 @@
       color: var(--indigo-900);
       margin-bottom: 8px;
     }
-    .popup-box .form-fields { display: flex; flex-direction: column; gap: 12px; }
+    .popup-box .form-fields { display: flex; flex-direction: column; gap: 10px; }
     .popup-box .form-fields input {
       width: 100%;
-      padding: 14px 16px;
+      padding: 12px 14px;
       border: 2px solid #e2e8f0;
-      border-radius: 12px;
+      border-radius: 10px;
       font-size: 16px;
       font-family: inherit;
       transition: border-color 0.2s;
-      min-height: 50px;
+      min-height: 46px;
     }
     .popup-box .form-fields input:focus { outline: none; border-color: var(--indigo); }
     .popup-box .form-fields input::placeholder { color: var(--slate-400); }
@@ -653,16 +660,16 @@
     .popup-box .form-error.show { display: block; }
     .popup-box .btn-preorder {
       width: 100%;
-      padding: 16px;
+      padding: 14px;
       background: var(--indigo);
       color: var(--white);
       border: none;
-      border-radius: 14px;
+      border-radius: 12px;
       font-family: 'Oswald', sans-serif;
-      font-size: 20px;
+      font-size: 18px;
       cursor: pointer;
       transition: background 0.2s;
-      min-height: 54px;
+      min-height: 50px;
     }
     .popup-box .btn-preorder:hover { background: var(--indigo-dark); }
     .popup-box .btn-preorder:disabled { background: var(--slate-400); cursor: not-allowed; }
@@ -812,6 +819,9 @@
       width: 100%;
       border: 3px solid var(--black);
       box-shadow: 10px 10px 0 var(--indigo);
+      max-height: calc(100vh - 48px);
+      overflow-y: auto;
+      margin: auto;
     }
     .modal-emoji { font-size: 56px; margin-bottom: 16px; }
     .modal-box h3 {
@@ -911,20 +921,20 @@
       .modal-box p { font-size: 14px; }
       .modal-close { padding: 12px 32px; font-size: 15px; min-height: 48px; }
       /* 사전예약 팝업 모바일 */
-      .popup-overlay { padding: 16px; }
+      .popup-overlay { padding: 12px; }
       .popup-box {
-        padding: 28px 18px;
-        border-radius: 20px;
-        border-width: 2px;
-        box-shadow: 7px 7px 0 var(--indigo);
-        max-height: 90vh;
-        overflow-y: auto;
+        padding: 24px 16px;
+        border-radius: 16px;
+        box-shadow: 4px 4px 0 var(--indigo);
       }
-      .popup-close { top: 12px; right: 12px; font-size: 20px; }
-      .popup-box .form-top h2 { font-size: 22px; }
-      .popup-box .form-fields input { font-size: 16px; min-height: 48px; padding: 12px 14px; }
-      .popup-box .btn-preorder { font-size: 18px; padding: 14px; min-height: 52px; }
-      .popup-box .form-note { font-size: 11px; }
+      .popup-close { top: 10px; right: 10px; font-size: 18px; }
+      .popup-box .form-top { margin-bottom: 12px; }
+      .popup-box .form-top h2 { font-size: 20px; }
+      .popup-box .form-top .deal { font-size: 13px; }
+      .popup-box .form-fields { gap: 8px; }
+      .popup-box .form-fields input { padding: 11px 12px; min-height: 44px; }
+      .popup-box .btn-preorder { font-size: 16px; padding: 12px; min-height: 46px; }
+      .popup-box .form-note { font-size: 10px; margin-top: 6px; }
       /* 체크박스 모바일 */
       .consent-label { font-size: 12px; gap: 6px; }
       .consent-label input[type="checkbox"] { width: 16px; height: 16px; }
@@ -1427,9 +1437,11 @@
     // ═══════════════════════════════════════════
     function openPrivacy() {
       document.getElementById('privacyModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
     }
     function closePrivacy() {
       document.getElementById('privacyModal').classList.remove('active');
+      document.body.style.overflow = '';
     }
 
     // ═══════════════════════════════════════════
@@ -1509,11 +1521,13 @@
     function openPopup(buttonName) {
       trackClick(buttonName || 'popup_cta');
       document.getElementById('popupModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
       setTimeout(() => document.getElementById('popupPhone').focus(), 200);
     }
 
     function closePopup() {
       document.getElementById('popupModal').classList.remove('active');
+      document.body.style.overflow = '';
       document.getElementById('popupPhone').classList.remove('error');
       var cl = document.getElementById('popupConsent').closest('.consent-label');
       if (cl) cl.classList.remove('error');
