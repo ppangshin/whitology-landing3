@@ -71,7 +71,52 @@
       padding: 64px 24px 72px;
       text-align: center;
     }
-    .hero-inner { max-width: 680px; margin: 0 auto; }
+    .hero-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+    @media (min-width: 768px) {
+      .hero-inner {
+        flex-direction: row;
+        text-align: left;
+        gap: 48px;
+      }
+    }
+    .hero-text { flex: 1; }
+    .hero-image {
+      flex: 1;
+      max-width: 400px;
+      position: relative;
+    }
+    .hero-image-frame {
+      border: 4px solid var(--black);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 8px 8px 0 var(--indigo);
+    }
+    .hero-image-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    .hero-image-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: var(--pink);
+      color: var(--white);
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      padding: 5px 12px;
+      border-radius: 999px;
+      text-transform: uppercase;
+    }
     .hero-badge {
       display: inline-block;
       background: var(--pink);
@@ -265,6 +310,18 @@
     .why-card h3 { font-size: 17px; font-weight: 900; margin-bottom: 6px; }
     .why-card p { font-size: 14px; color: var(--slate-400); line-height: 1.5; }
 
+    /* Why 섹션 상단 이미지 */
+    .why-hero-img {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .why-hero-img img {
+      max-width: 320px;
+      width: 100%;
+      border-radius: 20px;
+      border: 3px solid rgba(255,255,255,0.15);
+    }
+
     /* ── SOCIAL PROOF ── */
     .social-proof {
       padding: 72px 24px;
@@ -312,6 +369,16 @@
       scroll-margin-top: 20px;
     }
     .preorder-inner { max-width: 480px; margin: 0 auto; }
+    .preorder-hero-img {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .preorder-hero-img img {
+      max-width: 260px;
+      width: 100%;
+      margin: 0 auto;
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.15));
+    }
     .preorder-form {
       background: var(--white);
       border: 3px solid var(--black);
@@ -571,6 +638,8 @@
       .urgency-banner { font-size: 12px; padding: 8px 0; border-bottom-width: 2px; }
       .ticker-item { padding: 0 28px; }
       .hero { padding: 36px 20px 44px; }
+      .hero-inner { gap: 28px; }
+      .hero-text { text-align: center; }
       .hero-badge { font-size: 11px; padding: 5px 14px; margin-bottom: 14px; }
       .hero h1 { font-size: 42px; margin-bottom: 14px; }
       .hero h1 .highlight { padding: 1px 10px; }
@@ -578,6 +647,10 @@
       .hero-sub br { display: none; }
       .hero-deal { font-size: 16px; margin-bottom: 20px; }
       .btn-hero { width: 100%; justify-content: center; padding: 18px 24px; font-size: 18px; box-shadow: 4px 4px 0 var(--black); min-height: 56px; }
+      /* 히어로 이미지 모바일 */
+      .hero-image { max-width: 300px; margin: 0 auto; }
+      .hero-image-frame { border-width: 3px; border-radius: 16px; box-shadow: 6px 6px 0 var(--indigo); }
+      .hero-image-badge { font-size: 10px; top: 10px; right: 10px; padding: 4px 10px; }
       .spots-left { margin-top: 20px; }
       .spots-text { font-size: 13px; }
       .spots-text .remaining { font-size: 18px; }
@@ -589,6 +662,8 @@
       .trust-icon svg { width: 15px; height: 15px; }
       .why-section { padding: 48px 16px; }
       .why-section h2 { font-size: 28px; margin-bottom: 32px; }
+      .why-hero-img { margin-bottom: 28px; }
+      .why-hero-img img { max-width: 240px; border-radius: 16px; }
       .why-grid { gap: 12px; }
       .why-card { padding: 20px 16px; gap: 12px; border-radius: 14px; }
       .why-card-icon { width: 38px; height: 38px; border-radius: 10px; }
@@ -603,6 +678,7 @@
       .review-card blockquote { font-size: 14px; line-height: 1.55; margin-bottom: 8px; }
       .review-card cite { font-size: 12px; }
       .preorder-section { padding: 44px 16px; }
+      .preorder-hero-img img { max-width: 200px; }
       .preorder-form { padding: 28px 18px; border-width: 2px; box-shadow: 6px 6px 0 var(--indigo); border-radius: 20px; }
       .form-top h2 { font-size: 24px; }
       .form-top .deal { font-size: 15px; }
@@ -670,26 +746,36 @@
   <!-- HERO -->
   <section class="hero" id="hero">
     <div class="hero-inner reveal">
-      <span class="hero-badge">얼리버드 사전예약 오픈</span>
-      <h1>누렁니 탈출<br><span class="highlight">단 7일!</span></h1>
-      <p class="hero-sub">
-        식약처 인증 미백 성분 + 특허 LED 기술<br>
-        <strong>하루 10분, 7일이면 완성</strong>되는 화이트닝
-      </p>
-      <p class="hero-deal"><s>149,000원</s> → 89,000원 (40% 할인)</p>
-      <button class="btn-hero" onclick="scrollToForm('hero_cta')">
-        사전예약하고 할인받기 →
-      </button>
-
-      <!-- 잔여석 프로그레스 바 -->
-      <div class="spots-left">
-        <p class="spots-text">
-          <span class="live-dot"></span>
-          300명 중 <span class="remaining" id="hero-remaining">--</span>자리 남음
+      <div class="hero-text">
+        <span class="hero-badge">얼리버드 사전예약 오픈</span>
+        <h1>누렁니 탈출<br><span class="highlight">단 7일!</span></h1>
+        <p class="hero-sub">
+          식약처 인증 미백 성분 + 특허 LED 기술<br>
+          <strong>하루 10분, 7일이면 완성</strong>되는 화이트닝
         </p>
-        <div class="progress-bar">
-          <div class="progress-fill" id="hero-progress" style="width: 0%"></div>
+        <p class="hero-deal"><s>149,000원</s> → 89,000원 (40% 할인)</p>
+        <button class="btn-hero" onclick="scrollToForm('hero_cta')">
+          사전예약하고 할인받기 →
+        </button>
+
+        <!-- 잔여석 프로그레스 바 -->
+        <div class="spots-left">
+          <p class="spots-text">
+            <span class="live-dot"></span>
+            300명 중 <span class="remaining" id="hero-remaining">--</span>자리 남음
+          </p>
+          <div class="progress-bar">
+            <div class="progress-fill" id="hero-progress" style="width: 0%"></div>
+          </div>
         </div>
+      </div>
+
+      <!-- Before/After 이미지 -->
+      <div class="hero-image">
+        <div class="hero-image-frame">
+          <img src="images/before3.png" alt="Whitology Before & After" />
+        </div>
+        <span class="hero-image-badge">Real Before & After</span>
       </div>
     </div>
   </section>
@@ -728,6 +814,9 @@
   <section class="why-section">
     <div class="why-inner">
       <h2 class="reveal">왜 Whitology 인가?</h2>
+      <div class="why-hero-img reveal">
+        <img src="images/hero-device.jpeg" alt="Whitology 디바이스" />
+      </div>
       <div class="why-grid">
         <div class="why-card reveal">
           <div class="why-card-icon">
@@ -794,6 +883,9 @@
   <!-- 사전예약 폼 -->
   <section class="preorder-section" id="preorder-form">
     <div class="preorder-inner">
+      <div class="preorder-hero-img reveal">
+        <img src="images/Whitology3_Package.png" alt="Whitology 패키지" />
+      </div>
       <div class="preorder-form reveal">
         <div class="form-top">
           <h2>얼리버드 사전예약</h2>
