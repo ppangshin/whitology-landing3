@@ -1,520 +1,1132 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WHITOLOGY — 너 이렇게 데이트 할 거야?</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;800;900&display=swap" rel="stylesheet">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Noto Sans KR', sans-serif; background: #f5f0e8; color: #111; overflow-x: hidden; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Whitology – 사전예약 얼리버드 40% 할인</title>
 
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    background: #111;
-    color: #f5f0e8;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-left {
-    padding: 80px 48px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    z-index: 2;
-  }
-  .hero-right {
-    position: relative;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  .product-img-wrap {
-    position: relative;
-    width: 380px;
-    height: 560px;
-  }
-  .product-img-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .img-placeholder {
-    width: 100%;
-    height: 100%;
-    background: #1e1e1e;
-    border: 1px dashed rgba(255,255,255,0.15);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-  }
-  .img-placeholder .ph-icon { font-size: 32px; opacity: 0.4; }
-  .img-placeholder .ph-label { font-size: 11px; letter-spacing: 2px; color: rgba(255,255,255,0.25); text-align: center; line-height: 1.8; }
-  .hero-sticker-1 {
-    position: absolute; top: 60px; right: 20px;
-    background: #d4f500; color: #111;
-    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
-    font-size: 11px; padding: 6px 12px;
-    transform: rotate(8deg); letter-spacing: 1px; z-index: 3;
-  }
-  .hero-sticker-2 {
-    position: absolute; bottom: 80px; left: -10px;
-    background: #ff3b3b; color: #fff;
-    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
-    font-size: 11px; padding: 6px 12px;
-    transform: rotate(-6deg); letter-spacing: 1px; z-index: 3;
-  }
-  .hero-bg-circle {
-    position: absolute; width: 500px; height: 500px; border-radius: 50%;
-    background: rgba(212,245,0,0.05);
-    top: 50%; left: 50%; transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
-  .hero-tag {
-    display: inline-block;
-    border: 1px solid rgba(255,255,255,0.3);
-    padding: 4px 12px; font-size: 11px; letter-spacing: 3px;
-    text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 32px;
-  }
-  .hero h1 {
-    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
-    font-weight: 900;
-    font-size: clamp(32px, 4.5vw, 56px);
-    line-height: 1.2; letter-spacing: 0px; margin-bottom: 24px;
-  }
-  .hero h1 .accent { color: #d4f500; }
-  .hero-sub {
-    font-size: 15px; line-height: 1.8;
-    color: rgba(255,255,255,0.55);
-    max-width: 340px; margin-bottom: 48px;
-  }
-  .cta-btn {
-    display: inline-block; background: #d4f500; color: #111;
-    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
-    font-weight: 800;
-    font-size: 17px; letter-spacing: 0.5px; padding: 18px 36px;
-    border: none; cursor: pointer;
-    transform: rotate(-1.5deg); transition: transform 0.2s;
-    text-decoration: none;
-  }
-  .cta-btn:hover { transform: rotate(0.5deg) scale(1.03); }
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Noto+Sans+KR:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* ── PROBLEM ── */
-  .section-problem {
-    background: #f5f0e8;
-    padding: 100px 48px;
-    display: grid;
-    grid-template-columns: 1fr 0.45fr;
-    gap: 80px;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .sticker-red {
-    display: inline-block; background: #ff3b3b; color: #fff;
-    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
-    font-size: 12px; padding: 5px 12px;
-    transform: rotate(-2deg); margin-bottom: 24px; letter-spacing: 1px;
-  }
-  .section-problem h2 {
-    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
-    font-size: clamp(26px, 3.5vw, 42px);
-    line-height: 1.25; letter-spacing: 0px; margin-bottom: 32px;
-  }
-  .problem-body {
-    font-size: 16px; line-height: 1.9; color: #444;
-    border-left: 3px solid #111; padding-left: 24px;
-  }
-  .problem-img-wrap { position: relative; }
-  .problem-img-box {
-    width: 100%; aspect-ratio: 9/16;
-    background: #e8e3d8;
-    border: 1px dashed rgba(0,0,0,0.12);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 12px;
-    position: relative; overflow: hidden;
-  }
-  .problem-img-box img { width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0; }
-  .problem-img-box .ph-icon { font-size: 28px; opacity: 0.2; }
-  .problem-img-box .ph-label { font-size: 11px; letter-spacing: 2px; color: rgba(0,0,0,0.2); text-align: center; line-height: 1.8; }
-  .img-caption-tag {
-    position: absolute; bottom: -12px; right: -12px;
-    background: #111; color: #f5f0e8;
-    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
-    font-size: 12px; padding: 8px 16px;
-    transform: rotate(2deg); letter-spacing: 1px; z-index: 2;
-  }
+    :root {
+      --indigo: #4f46e5;
+      --indigo-dark: #4338ca;
+      --indigo-900: #1e1b4b;
+      --pink: #ec4899;
+      --yellow: #facc15;
+      --black: #0a0a0a;
+      --white: #ffffff;
+      --slate-50: #f8fafc;
+      --slate-400: #94a3b8;
+      --slate-500: #64748b;
+      --slate-600: #475569;
+      --slate-900: #0f172a;
+      --green: #22c55e;
+      --red: #ef4444;
+    }
 
-  /* ── FEATURES ── */
-  .section-features { background: #111; color: #f5f0e8; padding: 100px 48px; }
-  .section-features .eyebrow {
-    font-size: 11px; letter-spacing: 4px;
-    color: rgba(255,255,255,0.35); text-transform: uppercase; margin-bottom: 20px;
-  }
-  .section-features .headline {
-    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
-    font-size: clamp(24px,3.5vw,40px); letter-spacing:0px; line-height:1.25; margin-bottom: 60px;
-  }
-  .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
-  .feature-item { background: #1a1a1a; padding: 40px 32px; position: relative; overflow: hidden; }
-  .feature-item:nth-child(2) { background: #d4f500; color: #111; }
-  .feature-num {
-    font-family: 'Noto Sans KR', sans-serif; font-weight: 800; font-size: 80px;
-    color: rgba(255,255,255,0.05); position: absolute; top: 16px; right: 24px; line-height: 1;
-  }
-  .feature-item:nth-child(2) .feature-num { color: rgba(0,0,0,0.06); }
-  .feature-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 12px; }
-  .feature-item:nth-child(2) .feature-label { color: rgba(0,0,0,0.35); }
-  .feature-title { font-family: 'Noto Sans KR', sans-serif; font-weight: 800; font-size: 22px; line-height: 1.2; margin-bottom: 12px; }
-  .feature-desc { font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.45); }
-  .feature-item:nth-child(2) .feature-desc { color: rgba(0,0,0,0.5); }
-  .badge-absurd {
-    display: inline-block; background: #ff3b3b; color: #fff;
-    font-size: 9px; letter-spacing: 1px; padding: 2px 7px; margin-left: 6px; vertical-align: middle;
-  }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+      color: var(--black);
+      background: var(--white);
+      overflow-x: hidden;
+      padding-bottom: 80px;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
 
-  /* ── SHOWCASE ── */
-  .section-showcase {
-    background: #f5f0e8; padding: 100px 48px;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
-  }
-  .showcase-img-col { display: flex; gap: 16px; align-items: flex-end; }
-  .showcase-img-main {
-    flex: 2; aspect-ratio: 3/4;
-    background: #e0dbd0;
-    border: 1px dashed rgba(0,0,0,0.12);
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
-    position: relative; overflow: hidden;
-  }
-  .showcase-img-main img { width:100%; height:100%; object-fit: cover; position: absolute; top:0; left:0; }
-  .showcase-img-sub {
-    flex: 1; aspect-ratio: 1/1; background: #d4f500;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
-    position: relative; overflow: hidden; margin-bottom: 40px;
-  }
-  .showcase-img-sub img { width:100%; height:100%; object-fit: cover; position: absolute; top:0; left:0; }
-  .showcase-img-sub .ph-icon { font-size: 20px; opacity: 0.3; }
-  .showcase-img-sub .ph-label { font-size: 10px; letter-spacing: 1px; color: rgba(0,0,0,0.3); text-align: center; }
-  .showcase-main-icon { font-size: 28px; opacity: 0.2; }
-  .showcase-main-ph { font-size: 11px; letter-spacing: 2px; color: rgba(0,0,0,0.2); text-align: center; line-height: 1.8; }
-  .showcase-text h2 {
-    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
-    font-size: clamp(26px,3.5vw,42px); letter-spacing: 0px; line-height: 1.25; margin-bottom: 24px;
-  }
-  .showcase-text p { font-size: 15px; line-height: 1.9; color: #555; margin-bottom: 32px; }
-  .stamp-inline {
-    width: 84px; height: 84px;
-    border: 2px solid #111; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center; text-align: center;
-    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
-    font-size: 12px; line-height: 1.4; color: #111;
-    transform: rotate(-8deg); letter-spacing: 0.5px;
-  }
+    /* ── ANIMATIONS ── */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* ── CLAIM ── */
-  .section-claim { background: #d4f500; padding: 100px 48px; position: relative; overflow: hidden; }
-  .claim-bg {
-    position: absolute; font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
-    font-size: 260px; color: rgba(0,0,0,0.04);
-    top: -20px; left: -20px; line-height: 1; pointer-events: none;
-  }
-  .section-claim h2 {
-    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
-    font-size: clamp(32px,4.5vw,56px); line-height: 1.2;
-    letter-spacing: 0px; color: #111;
-    position: relative; z-index: 1; max-width: 640px;
-  }
-  .section-claim .claim-note {
-    font-size: 13px; color: rgba(0,0,0,0.4);
-    margin-top: 24px; position: relative; z-index: 1;
-  }
-  .stamp-claim {
-    position: absolute; right: 60px; bottom: 60px;
-    width: 100px; height: 100px;
-    border: 3px solid #111; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center; text-align: center;
-    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
-    font-size: 13px; line-height: 1.3; color: #111;
-    transform: rotate(12deg); letter-spacing: 0.5px;
-  }
+    /* ── URGENCY BANNER ── */
+    .urgency-banner {
+      background: var(--black);
+      color: var(--yellow);
+      padding: 10px 0;
+      overflow: hidden;
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-bottom: 3px solid var(--yellow);
+    }
+    .ticker-wrap { display: flex; white-space: nowrap; animation: ticker 18s linear infinite; }
+    .ticker-item { padding: 0 48px; flex-shrink: 0; }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
 
-  /* ── CTA ── */
-  .section-cta { background: #111; color: #f5f0e8; padding: 120px 48px; text-align: center; }
-  .section-cta h2 {
-    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
-    font-size: clamp(28px,4vw,50px); letter-spacing: 0px; margin-bottom: 16px; line-height: 1.2;
-  }
-  .section-cta .sub { font-size: 15px; color: rgba(255,255,255,0.45); margin-bottom: 48px; line-height: 1.8; }
-  .email-row { display: flex; gap: 0; max-width: 480px; margin: 0 auto 16px; }
-  .email-row input {
-    flex: 1; background: #1a1a1a;
-    border: 1px solid rgba(255,255,255,0.12); border-right: none;
-    color: #f5f0e8; font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
-    font-size: 14px; padding: 16px 20px; outline: none;
-  }
-  .email-row input::placeholder { color: rgba(255,255,255,0.2); }
-  .email-row button {
-    background: #d4f500; color: #111; border: none;
-    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
-    font-size: 14px; padding: 16px 24px; cursor: pointer; transition: transform 0.15s;
-  }
-  .email-row button:hover { transform: rotate(-1deg) scale(1.02); }
-  .cta-fine { font-size: 11px; color: rgba(255,255,255,0.18); letter-spacing: 1px; }
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--slate-50) 0%, #ede9fe 100%);
+      padding: 64px 24px 72px;
+      text-align: center;
+    }
+    .hero-inner { max-width: 680px; margin: 0 auto; }
+    .hero-badge {
+      display: inline-block;
+      background: var(--pink);
+      color: var(--white);
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      padding: 6px 18px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(48px, 9vw, 88px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      font-style: italic;
+      text-transform: uppercase;
+      color: var(--indigo-900);
+      margin-bottom: 20px;
+    }
+    .hero h1 .highlight {
+      color: var(--white);
+      background: var(--indigo);
+      padding: 2px 18px;
+      display: inline-block;
+    }
+    .hero-sub {
+      font-size: clamp(16px, 2.2vw, 20px);
+      font-weight: 600;
+      color: var(--slate-600);
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+    .hero-sub strong { color: var(--indigo); }
 
-  /* ── FOOTER ── */
-  footer {
-    background: #0a0a0a; padding: 28px 48px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .footer-brand { font-family: 'Noto Sans KR', sans-serif; font-weight: 800; font-size: 18px; color: rgba(255,255,255,0.25); letter-spacing: 3px; }
-  .footer-note { font-size: 11px; color: rgba(255,255,255,0.12); }
+    .hero-deal {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--pink);
+      margin-bottom: 28px;
+    }
+    .hero-deal s {
+      color: var(--slate-400);
+      font-weight: 400;
+      margin-right: 6px;
+    }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
+    .btn-hero {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--indigo);
+      color: var(--white);
+      padding: 20px 44px;
+      border-radius: 999px;
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(18px, 2.2vw, 24px);
+      border: none;
+      cursor: pointer;
+      box-shadow: 6px 6px 0 var(--black);
+      transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+    .btn-hero:hover {
+      background: var(--indigo-dark);
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0 var(--black);
+    }
+    .btn-hero:active {
+      transform: translate(3px, 3px);
+      box-shadow: 3px 3px 0 var(--black);
+    }
 
-    /* HERO */
-    .hero { grid-template-columns: 1fr; min-height: auto; }
-    .hero-left { padding: 64px 24px 32px; order: 1; }
-    .hero h1 { font-size: 36px; }
-    .hero-sub { font-size: 14px; margin-bottom: 32px; }
-    .cta-btn { font-size: 15px; padding: 14px 28px; }
-    .hero-right { order: 2; height: 300px; }
-    .product-img-wrap { width: 160px; height: 240px; }
-    .hero-sticker-1 { font-size: 10px; top: 20px; right: 12px; }
-    .hero-sticker-2 { font-size: 10px; bottom: 40px; left: 0; }
+    /* ── 잔여석 프로그레스 (히어로 안) ── */
+    .spots-left {
+      margin-top: 24px;
+      max-width: 360px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .spots-text {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--slate-600);
+      margin-bottom: 8px;
+    }
+    .spots-text .remaining {
+      color: var(--red);
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--indigo), var(--pink));
+      border-radius: 999px;
+      transition: width 0.8s ease;
+    }
+    .live-dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      margin-right: 5px;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
 
-    /* PROBLEM */
-    .section-problem { grid-template-columns: 1fr; padding: 56px 24px 0; gap: 32px; }
-    .problem-text { padding: 0; }
-    .section-problem h2 { font-size: 28px; }
-    .problem-body { font-size: 14px; }
-    .problem-img-wrap { width: 100%; margin: 0 -24px; width: calc(100% + 48px); }
-    .problem-img-box { aspect-ratio: 3/4; border: none; }
-    .problem-img-box img { object-fit: cover; object-position: center; }
-    .img-caption-tag { bottom: 12px; right: 12px; }
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      background: var(--white);
+      border-top: 1px solid #e2e8f0;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 20px 24px;
+    }
+    .trust-items {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      gap: 36px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--slate-600);
+    }
+    .trust-icon {
+      width: 36px; height: 36px;
+      background: var(--indigo);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .trust-icon svg { width: 18px; height: 18px; }
 
-    /* FEATURES */
-    .section-features { padding: 56px 24px; }
-    .section-features .headline { font-size: 26px; margin-bottom: 40px; }
-    .features-grid { grid-template-columns: 1fr; gap: 2px; }
-    .feature-item { padding: 32px 24px; }
-    .feature-num { font-size: 56px; }
-    .feature-title { font-size: 19px; }
-    .feature-desc { font-size: 13px; }
+    /* ── WHY SECTION ── */
+    .why-section {
+      padding: 72px 24px;
+      background: var(--indigo-900);
+      color: var(--white);
+    }
+    .why-inner { max-width: 900px; margin: 0 auto; }
+    .why-section h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(32px, 5vw, 52px);
+      text-align: center;
+      text-transform: uppercase;
+      font-style: italic;
+      margin-bottom: 48px;
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 768px) {
+      .why-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .why-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 28px 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .why-card-icon {
+      width: 44px; height: 44px;
+      background: var(--indigo);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .why-card-icon svg { width: 22px; height: 22px; }
+    .why-card h3 { font-size: 17px; font-weight: 900; margin-bottom: 6px; }
+    .why-card p { font-size: 14px; color: var(--slate-400); line-height: 1.5; }
 
-    /* SHOWCASE */
-    .section-showcase { grid-template-columns: 1fr; padding: 56px 24px; gap: 32px; }
-    .showcase-img-col { display: flex; flex-direction: column; gap: 12px; align-items: stretch; }
-    .showcase-img-main { flex: none; width: 100%; aspect-ratio: 4/3; }
-    .showcase-img-sub { flex: none; width: 100%; aspect-ratio: 16/9; margin-bottom: 0; }
-    .showcase-text h2 { font-size: 30px; }
-    .showcase-text p { font-size: 14px; }
+    /* ── SOCIAL PROOF ── */
+    .social-proof {
+      padding: 72px 24px;
+      background: var(--yellow);
+      border-top: 4px solid var(--black);
+      border-bottom: 4px solid var(--black);
+    }
+    .social-proof h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(28px, 4vw, 44px);
+      text-align: center;
+      text-transform: uppercase;
+      font-style: italic;
+      margin-bottom: 40px;
+    }
+    .review-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    @media (min-width: 768px) {
+      .review-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .review-card {
+      background: var(--white);
+      border: 3px solid var(--black);
+      border-radius: 16px;
+      padding: 24px 20px;
+      box-shadow: 5px 5px 0 var(--black);
+    }
+    .review-stars { color: var(--black); font-size: 16px; margin-bottom: 10px; }
+    .review-card blockquote {
+      font-size: 15px; font-weight: 700; line-height: 1.6; margin-bottom: 10px;
+    }
+    .review-card cite {
+      font-weight: 900; font-style: normal; color: var(--slate-500); font-size: 13px;
+    }
 
-    /* CLAIM */
-    .section-claim { padding: 56px 24px 80px; }
-    .section-claim h2 { font-size: 34px; }
-    .claim-bg { font-size: 160px; }
-    .stamp-claim { right: 20px; bottom: 20px; width: 80px; height: 80px; font-size: 11px; }
+    /* ── PREORDER FORM ── */
+    .preorder-section {
+      padding: 80px 24px;
+      background: linear-gradient(180deg, #f0f0ff 0%, var(--white) 100%);
+      scroll-margin-top: 20px;
+    }
+    .preorder-inner { max-width: 480px; margin: 0 auto; }
+    .preorder-form {
+      background: var(--white);
+      border: 3px solid var(--black);
+      border-radius: 24px;
+      padding: 40px 28px;
+      box-shadow: 8px 8px 0 var(--indigo);
+    }
+    .form-top { text-align: center; margin-bottom: 24px; }
+    .form-top h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 28px;
+      font-style: italic;
+      color: var(--indigo-900);
+      margin-bottom: 8px;
+    }
+    .form-top .deal { font-size: 16px; font-weight: 700; color: var(--pink); }
+    .form-top .deal s { color: var(--slate-400); font-weight: 400; margin-right: 6px; }
 
-    /* CTA */
-    .section-cta { padding: 72px 24px; }
-    .section-cta h2 { font-size: 30px; }
-    .section-cta .sub { font-size: 13px; margin-bottom: 32px; }
-    .email-row { flex-direction: column; max-width: 100%; }
-    .email-row input { border-right: 1px solid rgba(255,255,255,0.12); border-bottom: none; font-size: 14px; padding: 14px 16px; }
-    .email-row button { font-size: 15px; padding: 14px 20px; }
+    /* 혜택 단계 */
+    .tier-display {
+      background: var(--slate-50);
+      border: 2px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+    }
+    .tier-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--slate-400);
+    }
+    .tier-row.active {
+      color: var(--indigo);
+      font-size: 15px;
+    }
+    .tier-row.active .tier-badge {
+      background: var(--indigo);
+      color: var(--white);
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      animation: pulse 1.5s infinite;
+    }
+    .tier-row.done {
+      text-decoration: line-through;
+      color: var(--slate-400);
+      opacity: 0.5;
+    }
 
-    /* FOOTER */
-    footer { flex-direction: column; gap: 10px; padding: 24px; text-align: center; }
-    .footer-brand { font-size: 15px; }
-  }
+    .form-countdown {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 0 0 24px;
+    }
+    .cd-box {
+      background: var(--indigo-900);
+      color: var(--white);
+      border-radius: 10px;
+      padding: 8px 12px;
+      min-width: 54px;
+      text-align: center;
+    }
+    .cd-num {
+      font-family: 'Oswald', sans-serif;
+      font-size: 28px;
+      display: block;
+      line-height: 1;
+    }
+    .cd-label {
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      color: var(--slate-400);
+      margin-top: 4px;
+      display: block;
+    }
+    .form-fields { display: flex; flex-direction: column; gap: 12px; }
+    .form-fields input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 15px;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    .form-fields input:focus { outline: none; border-color: var(--indigo); }
+    .form-fields input::placeholder { color: var(--slate-400); }
+    .btn-preorder {
+      width: 100%;
+      padding: 18px;
+      background: var(--indigo);
+      color: var(--white);
+      border: none;
+      border-radius: 14px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 4px;
+    }
+    .btn-preorder:hover { background: var(--indigo-dark); }
+    .btn-preorder:active { transform: scale(0.98); }
+    .btn-preorder:disabled {
+      background: var(--slate-400);
+      cursor: not-allowed;
+    }
+    .form-note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--slate-500);
+      margin-top: 12px;
+    }
+    .form-counter {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--slate-600);
+    }
+    .form-counter .num {
+      color: var(--pink);
+      font-family: 'Oswald', sans-serif;
+      font-size: 18px;
+    }
 
-  /* iPhone SE 등 소형 */
-  @media (max-width: 375px) {
-    .hero h1 { font-size: 30px; }
-    .hero-left { padding: 48px 20px 28px; }
-    .section-problem h2 { font-size: 24px; }
-    .section-features .headline { font-size: 22px; }
-    .section-claim h2 { font-size: 28px; }
-    .section-cta h2 { font-size: 26px; }
-  }
-</style>
+    /* ── FLOATING CTA ── */
+    .floating-cta {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--white);
+      border-top: 3px solid var(--black);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      z-index: 1000;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+    }
+    .floating-cta.show { transform: translateY(0); }
+    .floating-text { font-size: 13px; font-weight: 700; color: var(--slate-600); }
+    .floating-text .price { color: var(--pink); font-family: 'Oswald', sans-serif; font-size: 18px; }
+    .floating-spots { font-size: 12px; color: var(--red); font-weight: 700; }
+    .btn-float {
+      background: var(--indigo);
+      color: var(--white);
+      border: none;
+      padding: 12px 28px;
+      border-radius: 999px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .btn-float:hover { background: var(--indigo-dark); }
+
+    /* ── TOAST 알림 ── */
+    .toast-container {
+      position: fixed;
+      bottom: 90px;
+      left: 20px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .toast {
+      background: var(--white);
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 12px 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--slate-600);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transform: translateX(-120%);
+      transition: transform 0.4s ease;
+      max-width: 280px;
+    }
+    .toast.show { transform: translateX(0); }
+    .toast-dot {
+      width: 8px; height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      color: var(--white);
+      padding: 36px 24px;
+      text-align: center;
+    }
+    footer .logo { font-family: 'Oswald', sans-serif; font-size: 24px; font-style: italic; margin-bottom: 10px; }
+    footer .copy { color: var(--slate-500); font-size: 13px; margin-bottom: 16px; }
+    footer .links { display: flex; justify-content: center; gap: 20px; color: var(--slate-400); font-size: 13px; font-weight: 600; }
+    footer .links a:hover { color: var(--white); }
+
+    /* ── SUCCESS MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-box {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 48px 32px;
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      border: 3px solid var(--black);
+      box-shadow: 10px 10px 0 var(--indigo);
+    }
+    .modal-emoji { font-size: 56px; margin-bottom: 16px; }
+    .modal-box h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 28px;
+      margin-bottom: 12px;
+      color: var(--indigo-900);
+    }
+    .modal-box p { font-size: 15px; color: var(--slate-600); line-height: 1.6; }
+    .modal-close {
+      margin-top: 24px;
+      background: var(--indigo);
+      color: var(--white);
+      border: none;
+      padding: 14px 36px;
+      border-radius: 12px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 767px) {
+      body { padding-bottom: 68px; -webkit-text-size-adjust: 100%; }
+      .urgency-banner { font-size: 12px; padding: 8px 0; border-bottom-width: 2px; }
+      .ticker-item { padding: 0 28px; }
+      .hero { padding: 36px 20px 44px; }
+      .hero-badge { font-size: 11px; padding: 5px 14px; margin-bottom: 14px; }
+      .hero h1 { font-size: 42px; margin-bottom: 14px; }
+      .hero h1 .highlight { padding: 1px 10px; }
+      .hero-sub { font-size: 15px; line-height: 1.6; margin-bottom: 4px; }
+      .hero-sub br { display: none; }
+      .hero-deal { font-size: 16px; margin-bottom: 20px; }
+      .btn-hero { width: 100%; justify-content: center; padding: 18px 24px; font-size: 18px; box-shadow: 4px 4px 0 var(--black); min-height: 56px; }
+      .spots-left { margin-top: 20px; }
+      .spots-text { font-size: 13px; }
+      .spots-text .remaining { font-size: 18px; }
+      .progress-bar { height: 10px; }
+      .trust-bar { padding: 16px 16px; }
+      .trust-items { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .trust-item { font-size: 12px; gap: 8px; }
+      .trust-icon { width: 32px; height: 32px; }
+      .trust-icon svg { width: 15px; height: 15px; }
+      .why-section { padding: 48px 16px; }
+      .why-section h2 { font-size: 28px; margin-bottom: 32px; }
+      .why-grid { gap: 12px; }
+      .why-card { padding: 20px 16px; gap: 12px; border-radius: 14px; }
+      .why-card-icon { width: 38px; height: 38px; border-radius: 10px; }
+      .why-card-icon svg { width: 18px; height: 18px; }
+      .why-card h3 { font-size: 15px; margin-bottom: 4px; }
+      .why-card p { font-size: 13px; }
+      .social-proof { padding: 48px 16px; }
+      .social-proof h2 { font-size: 24px; margin-bottom: 28px; }
+      .review-grid { gap: 12px; }
+      .review-card { padding: 20px 16px; border-width: 2px; box-shadow: 4px 4px 0 var(--black); border-radius: 14px; }
+      .review-stars { font-size: 14px; margin-bottom: 8px; }
+      .review-card blockquote { font-size: 14px; line-height: 1.55; margin-bottom: 8px; }
+      .review-card cite { font-size: 12px; }
+      .preorder-section { padding: 44px 16px; }
+      .preorder-form { padding: 28px 18px; border-width: 2px; box-shadow: 6px 6px 0 var(--indigo); border-radius: 20px; }
+      .form-top h2 { font-size: 24px; }
+      .form-top .deal { font-size: 15px; }
+      .tier-display { padding: 12px 14px; }
+      .tier-row { font-size: 12px; }
+      .tier-row.active { font-size: 14px; }
+      .form-countdown { gap: 8px; margin: 0 0 20px; }
+      .cd-box { min-width: 48px; padding: 7px 10px; border-radius: 8px; }
+      .cd-num { font-size: 24px; }
+      .cd-label { font-size: 9px; }
+      .form-fields { gap: 10px; }
+      .form-fields input { padding: 14px 14px; font-size: 16px; border-radius: 10px; border-width: 2px; min-height: 50px; }
+      .btn-preorder { padding: 16px; font-size: 18px; border-radius: 12px; min-height: 54px; }
+      .form-note { font-size: 11px; margin-top: 10px; }
+      .form-counter { font-size: 12px; margin-top: 14px; }
+      .form-counter .num { font-size: 16px; }
+      .floating-cta { padding: 10px 16px; border-top-width: 2px; gap: 0; flex-direction: column; }
+      .floating-text { display: none; }
+      .floating-spots { margin-bottom: 4px; }
+      .btn-float { width: 100%; text-align: center; padding: 14px 16px; font-size: 17px; min-height: 50px; }
+      .toast-container { bottom: 80px; left: 12px; }
+      .toast { font-size: 12px; padding: 10px 12px; max-width: 240px; }
+      footer { padding: 32px 16px; }
+      footer .logo { font-size: 20px; }
+      footer .copy { font-size: 12px; margin-bottom: 12px; }
+      footer .links { gap: 14px; font-size: 12px; flex-wrap: wrap; }
+      .modal-overlay { padding: 20px; }
+      .modal-box { padding: 36px 24px; border-radius: 20px; border-width: 2px; box-shadow: 7px 7px 0 var(--indigo); }
+      .modal-emoji { font-size: 44px; margin-bottom: 12px; }
+      .modal-box h3 { font-size: 24px; margin-bottom: 10px; }
+      .modal-box p { font-size: 14px; }
+      .modal-close { padding: 12px 32px; font-size: 15px; min-height: 48px; }
+    }
+    @media (max-width: 374px) {
+      .hero h1 { font-size: 36px; }
+      .hero-sub { font-size: 14px; }
+      .hero-deal { font-size: 15px; }
+      .btn-hero { font-size: 16px; padding: 16px 20px; }
+      .why-section h2 { font-size: 24px; }
+      .social-proof h2 { font-size: 22px; }
+      .form-top h2 { font-size: 22px; }
+      .cd-box { min-width: 42px; padding: 6px 8px; }
+      .cd-num { font-size: 20px; }
+    }
+    @supports (padding-bottom: env(safe-area-inset-bottom)) {
+      .floating-cta { padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
+      body { padding-bottom: calc(68px + env(safe-area-inset-bottom)); }
+    }
+  </style>
 </head>
 <body>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-left">
-    <div class="hero-tag">구강 케어 디바이스</div>
-    <h1><span class="accent">누런 치아</span><br>때문에 고민?</h1>
-    <p class="hero-sub">데이트할 때 웃는 게 신경 쓰였다면,<br>이미 필요한 거야.</p>
-    <a href="#cta" class="cta-btn">나 관심 있음 →</a>
-  </div>
-  <div class="hero-right">
-    <div class="hero-bg-circle"></div>
-    <div class="product-img-wrap">
-      <!--
-        ✏️ 제품 이미지 교체 방법:
-        아래 img 태그의 주석을 풀고 src에 이미지 경로를 넣으세요.
-        그 아래 .img-placeholder div는 삭제하세요.
-        권장: 세로형 누끼 PNG (투명 배경)
-      -->
-      <img src="images/before3.png" alt="Whitology 디바이스" style="width:100%;height:100%;object-fit:cover;display:block;">
-
-      <div class="hero-sticker-2">진짜임</div>
+  <!-- Urgency Ticker -->
+  <div class="urgency-banner">
+    <div class="ticker-wrap">
+      <span class="ticker-item">🔥 얼리버드 사전예약 40% 할인 — 선착순 300명 한정</span>
+      <span class="ticker-item">⏰ 사전예약 마감까지 얼마 남지 않았습니다</span>
+      <span class="ticker-item">🎁 사전예약 시 7일 체험 키트 무료 증정</span>
+      <span class="ticker-item">🔥 얼리버드 사전예약 40% 할인 — 선착순 300명 한정</span>
+      <span class="ticker-item">⏰ 사전예약 마감까지 얼마 남지 않았습니다</span>
+      <span class="ticker-item">🎁 사전예약 시 7일 체험 키트 무료 증정</span>
     </div>
   </div>
-</section>
 
-<!-- PROBLEM -->
-<section class="section-problem">
-  <div class="problem-text">
-    <div class="sticker-red">현실 직시</div>
-    <h2>회사 다니는<br>우리 언니도<br>치아색 때문에<br>고민한대.</h2>
-    <p class="problem-body">
-      스킨케어는 10단계인데,<br>
-      구강 케어는 아직도 칫솔 하나야?<br><br>
-      피부에 쓰는 돈의 1%도 안 쓰면서<br>
-      치아가 예뻐지길 바라는 거,<br>
-      솔직히 좀 웃기지 않아요?
-    </p>
-  </div>
-  <div class="problem-img-wrap">
-    <!--
-      ✏️ 라이프스타일 이미지 교체 방법:
-      아래 img 태그의 주석을 풀고 src에 이미지 경로를 넣으세요.
-      권장: 세로형, 표정 있는 인물 컷
-    -->
-    <div class="problem-img-box">
-      <img src="images/before.png" alt="Before After">
-    </div>
-    <div class="img-caption-tag">치아 때문에?</div>
-  </div>
-</section>
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-inner reveal">
+      <span class="hero-badge">얼리버드 사전예약 오픈</span>
+      <h1>누렁니 탈출<br><span class="highlight">단 7일!</span></h1>
+      <p class="hero-sub">
+        식약처 인증 미백 성분 + 특허 LED 기술<br>
+        <strong>하루 10분, 7일이면 완성</strong>되는 화이트닝
+      </p>
+      <p class="hero-deal"><s>149,000원</s> → 89,000원 (40% 할인)</p>
+      <button class="btn-hero" onclick="scrollToForm('hero_cta')">
+        사전예약하고 할인받기 →
+      </button>
 
-<!-- FEATURES -->
-<section class="section-features">
-  <p class="eyebrow">Whitology가 바꿔줄게</p>
-  <div class="headline">진동, 젤, 미백, 잇몸.<br>한 번에.</div>
-  <div class="features-grid">
-    <div class="feature-item" style="position:relative;overflow:hidden;">
-      <img src="images/hero-device.jpeg" alt="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0.15;">
-      <div style="position:relative;z-index:1;">
-        <div class="feature-num">01</div>
-        <div class="feature-label">Sonic Care</div>
-        <div class="feature-title">초음파 진동</div>
-        <div class="feature-desc">칫솔이 못 간 곳까지 쑤셔드림.<br>아프진 않음. 진짜로.</div>
+      <!-- 잔여석 프로그레스 바 -->
+      <div class="spots-left">
+        <p class="spots-text">
+          <span class="live-dot"></span>
+          300명 중 <span class="remaining" id="hero-remaining">--</span>자리 남음
+        </p>
+        <div class="progress-bar">
+          <div class="progress-fill" id="hero-progress" style="width: 0%"></div>
+        </div>
       </div>
     </div>
-    <div class="feature-item" style="position:relative;overflow:hidden;">
-      <img src="images/whitening-pen.jpeg" alt="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0.2;">
-      <div style="position:relative;z-index:1;">
-        <div class="feature-num">02</div>
-        <div class="feature-label">Gel Infusion</div>
-        <div class="feature-title">구강 젤 침투 <span class="badge-absurd">마법아님</span></div>
-        <div class="feature-desc">바르면 스며드는 기술.<br>마법 같지만 기술임.</div>
+  </section>
+
+  <!-- Trust Bar -->
+  <div class="trust-bar reveal">
+    <div class="trust-items">
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        식약처 인증 성분
       </div>
-    </div>
-    <div class="feature-item" style="position:relative;overflow:hidden;">
-      <img src="images/gum-care.jpeg" alt="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0.2;">
-      <div style="position:relative;z-index:1;">
-        <div class="feature-num">03</div>
-        <div class="feature-label">Whitening</div>
-        <div class="feature-title">미백 케어</div>
-        <div class="feature-desc">치아가 점점 밝아지는 기분이 아니라<br>실제로 밝아짐.</div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        7일 만에 효과
       </div>
-    </div>
-    <div class="feature-item" style="position:relative;overflow:hidden;">
-      <img src="images/fluoride-care.jpeg" alt="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0.2;">
-      <div style="position:relative;z-index:1;">
-        <div class="feature-num">04</div>
-        <div class="feature-label">Gum Care</div>
-        <div class="feature-title">잇몸 케어</div>
-        <div class="feature-desc">잇몸도 케어 받고 싶었잖아요.<br>사실.</div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+        </div>
+        시림 없는 공법
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        AI 구강 분석 앱
       </div>
     </div>
   </div>
-</section>
 
-<!-- SHOWCASE -->
-<section class="section-showcase">
-  <div class="showcase-img-col">
-    <!--
-      ✏️ 큰 이미지: 제품 사용 장면
-      <img src="images/usage.jpg" alt="">로 교체
-    -->
-    <div class="showcase-img-main">
-      <img src="images/product-set.jpeg" alt="Whitology 제품 세트">
+  <!-- Why Whitology -->
+  <section class="why-section">
+    <div class="why-inner">
+      <h2 class="reveal">왜 Whitology 인가?</h2>
+      <div class="why-grid">
+        <div class="why-card reveal">
+          <div class="why-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div>
+            <h3>특허 LED + 미백 젤 듀얼 시스템</h3>
+            <p>단독 사용 대비 미백 효과 3배. 디바이스와 전용 젤이 함께 작용합니다.</p>
+          </div>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <h3>식약처 인증, 시림 제로 공법</h3>
+            <p>과산화수소 없이 미백하는 독자 기술. 민감한 치아도 안심하세요.</p>
+          </div>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          </div>
+          <div>
+            <h3>AI 앱으로 진행 상황 체크</h3>
+            <p>치아 사진 한 장이면 AI가 미백 진행도와 구강 건강을 분석해 줍니다.</p>
+          </div>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div>
+            <h3>3종 젤로 맞춤 케어</h3>
+            <p>미백·잇몸·충치예방 — 당신의 구강 상태에 맞는 젤을 선택하세요.</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="showcase-img-sub">
-      <img src="images/app-screen.jpeg" alt="Whitology 앱">
+  </section>
+
+  <!-- Social Proof -->
+  <section class="social-proof">
+    <h2 class="reveal">진짜 후기가 증명합니다!</h2>
+    <div class="review-grid">
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"일주일 만에 확실히 달라졌어요. 이제 웃을 때 입 안 가려요!"</blockquote>
+        <cite>- 김*진 님</cite>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"커피 중독인데 진짜 하얘졌어요. 이건 주변에 말하고 다님."</blockquote>
+        <cite>- 이*우 님</cite>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <blockquote>"앱이랑 같이 쓰니까 관리하는 재미가 있어요. 강추!"</blockquote>
+        <cite>- 박*아 님</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- 사전예약 폼 -->
+  <section class="preorder-section" id="preorder-form">
+    <div class="preorder-inner">
+      <div class="preorder-form reveal">
+        <div class="form-top">
+          <h2>얼리버드 사전예약</h2>
+          <p class="deal"><s>149,000원</s> → 89,000원</p>
+        </div>
+
+        <!-- 혜택 단계 표시 -->
+        <div class="tier-display" id="tierDisplay">
+          <div class="tier-row" id="tier1" data-max="100">
+            <span>1~100번째</span>
+            <span>40% 할인</span>
+          </div>
+          <div class="tier-row" id="tier2" data-max="200">
+            <span>101~200번째</span>
+            <span>30% 할인</span>
+          </div>
+          <div class="tier-row" id="tier3" data-max="300">
+            <span>201~300번째</span>
+            <span>20% 할인</span>
+          </div>
+        </div>
+
+        <div class="form-countdown">
+          <div class="cd-box"><span class="cd-num" id="cd-days">00</span><span class="cd-label">DAYS</span></div>
+          <div class="cd-box"><span class="cd-num" id="cd-hours">00</span><span class="cd-label">HOURS</span></div>
+          <div class="cd-box"><span class="cd-num" id="cd-mins">00</span><span class="cd-label">MIN</span></div>
+          <div class="cd-box"><span class="cd-num" id="cd-secs">00</span><span class="cd-label">SEC</span></div>
+        </div>
+
+        <div class="form-fields">
+          <input type="email" id="email" placeholder="이메일 주소를 입력하세요" required />
+          <button class="btn-preorder" id="submitBtn" onclick="handlePreorder()">
+            사전예약 신청 →
+          </button>
+        </div>
+        <p class="form-note">이메일만으로 완료! 결제는 출시 후 진행됩니다.</p>
+        <div class="form-counter">
+          <span class="live-dot"></span>
+          현재 <span class="num" id="preorder-count">--</span>명 사전예약 완료
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p class="logo">WHITOLOGY</p>
+    <p class="copy">© 2026 Whitology Inc. All Rights Reserved.</p>
+    <div class="links">
+      <a href="#">이용약관</a>
+      <a href="#">개인정보처리방침</a>
+      <a href="#">고객센터</a>
+    </div>
+  </footer>
+
+  <!-- Floating CTA -->
+  <div class="floating-cta" id="floatingCta">
+    <span class="floating-spots" id="floatingSpots"></span>
+    <div class="floating-text">
+      얼리버드 <span class="price">89,000원</span>
+    </div>
+    <button class="btn-float" onclick="scrollToForm('floating_cta')">사전예약하기</button>
+  </div>
+
+  <!-- Toast 알림 컨테이너 -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Success Modal -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-box">
+      <div class="modal-emoji">🎉</div>
+      <h3>사전예약 완료!</h3>
+      <p>얼리버드 혜택이 확보되었습니다.<br>출시 시 입력하신 이메일로 안내드릴게요.</p>
+      <button class="modal-close" onclick="closeModal()">확인</button>
     </div>
   </div>
-  <div class="showcase-text">
-    <h2>이걸 쓰면<br>어떻게<br>되냐고요?</h2>
-    <p>치아가 빛납니다.<br>거짓말 같지만 진짜입니다.<br>진짜인지 모르겠으면 사전 신청하세요.</p>
-    <div class="stamp-inline">진짜임<br>아님<br>말고</div>
-  </div>
-</section>
 
-<!-- CLAIM -->
-<section class="section-claim">
-  <div class="claim-bg">!!</div>
-  <h2>먼저 아는<br>사람이<br>먼저 써.</h2>
-  <p class="claim-note">출시 전 얼리어답터 사전 신청 받는 중. 신청자에게만 런칭 혜택 드려요.</p>
-  <div class="stamp-claim">얼리<br>어답터<br>혜택</div>
-</section>
+  <script>
+    // ═══════════════════════════════════════════
+    // ✏️ SUPABASE 설정 — 여기만 수정하세요
+    // ═══════════════════════════════════════════
+    const SUPABASE_URL = 'https://YOUR_PROJECT.supabase.co';
+    const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY';
+    const TOTAL_SPOTS = 300;
 
-<!-- CTA -->
-<section id="cta" class="section-cta">
-  <h2>나 먼저<br>알고 싶음.</h2>
-  <p class="sub">이메일 남기면 출시 소식 + 얼리버드 혜택 먼저 드려요.<br>스팸은 안 보냄. 약속.</p>
-  <!--
-    ✏️ 이메일 폼 연동 방법:
-    Mailchimp: action에 Mailchimp embed form URL 넣기
-    Google Forms: 아래 form 전체를 Google Forms embed iframe으로 교체
-  -->
-  <form class="email-row" onsubmit="handleSubmit(event)">
-    <input type="email" id="email-input" placeholder="이메일 주소 입력" required />
-    <button type="submit">신청하기 →</button>
-  </form>
-  <p class="cta-fine" id="submit-msg">런칭 소식만 보내드립니다</p>
-</section>
+    // ═══════════════════════════════════════════
+    // UTM 파라미터 자동 파싱
+    // (메타 광고 URL: ?utm_source=ig&utm_medium=paid&utm_campaign=xxx)
+    // ═══════════════════════════════════════════
+    const params = new URLSearchParams(window.location.search);
+    const UTM = {
+      utm_source:   params.get('utm_source')   || null,
+      utm_medium:   params.get('utm_medium')   || null,
+      utm_campaign: params.get('utm_campaign') || null,
+    };
 
-<footer>
-  <div class="footer-brand">WHITOLOGY</div>
-  <div class="footer-note">© 2026 WHITOLOGY. ALL RIGHTS RESERVED.</div>
-</footer>
-
-<script>
-  // 이메일 제출 처리 (현재: 로컬 확인용)
-  // Mailchimp 연동 시 이 함수 대신 form action URL 사용
-  function handleSubmit(e) {
-    e.preventDefault();
-    const email = document.getElementById('email-input').value;
-    if (email) {
-      document.getElementById('submit-msg').textContent = '✓ 신청 완료! 런칭 소식 보내드릴게요.';
-      document.getElementById('submit-msg').style.color = '#d4f500';
-      document.getElementById('email-input').value = '';
+    // ═══════════════════════════════════════════
+    // Supabase REST 헬퍼
+    // ═══════════════════════════════════════════
+    async function supaFetch(table, options = {}) {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': options.prefer || '',
+          ...options.headers,
+        },
+        method: options.method || 'GET',
+        body: options.body ? JSON.stringify(options.body) : undefined,
+      });
+      return res;
     }
-  }
 
-  // 히어로 CTA → CTA 섹션 스크롤
-  document.querySelector('a.cta-btn').addEventListener('click', function(e) {
-    e.preventDefault();
-    document.getElementById('cta').scrollIntoView({ behavior: 'smooth' });
-  });
-</script>
+    // ═══════════════════════════════════════════
+    // 1) 방문 기록 (visits 테이블)
+    // ═══════════════════════════════════════════
+    async function trackVisit() {
+      try {
+        await supaFetch('visits', {
+          method: 'POST',
+          prefer: 'return=minimal',
+          body: { ...UTM },
+        });
+      } catch (e) { console.warn('visit 기록 실패:', e); }
+    }
 
+    // ═══════════════════════════════════════════
+    // 2) 클릭 기록 (clicks 테이블)
+    // button 값: 'hero_cta', 'bottom_cta', 'floating_cta' 등
+    // ═══════════════════════════════════════════
+    async function trackClick(buttonName) {
+      try {
+        await supaFetch('clicks', {
+          method: 'POST',
+          prefer: 'return=minimal',
+          body: { button: buttonName, ...UTM },
+        });
+      } catch (e) { console.warn('click 기록 실패:', e); }
+    }
+
+    // ═══════════════════════════════════════════
+    // 3) 사전예약 카운트 조회 (reservations 테이블)
+    // ═══════════════════════════════════════════
+    let currentCount = 0;
+
+    async function fetchCount() {
+      try {
+        const res = await supaFetch('reservations?select=id', {
+          headers: { 'Prefer': 'count=exact' }
+        });
+        const range = res.headers.get('content-range') || '';
+        const count = parseInt(range.split('/')[1] || '0');
+        currentCount = count;
+        updateUI(count);
+      } catch (e) {
+        console.warn('카운트 조회 실패:', e);
+        currentCount = 0;
+        updateUI(0);
+      }
+    }
+
+    function updateUI(count) {
+      const remaining = Math.max(0, TOTAL_SPOTS - count);
+      const pct = Math.min(100, (count / TOTAL_SPOTS) * 100);
+
+      document.getElementById('hero-remaining').textContent = remaining;
+      document.getElementById('hero-progress').style.width = pct + '%';
+      document.getElementById('preorder-count').textContent = count;
+      document.getElementById('floatingSpots').textContent =
+        remaining > 0 ? `잔여 ${remaining}자리` : '마감 임박!';
+
+      updateTiers(count);
+    }
+
+    function updateTiers(count) {
+      const tiers = [
+        document.getElementById('tier1'),
+        document.getElementById('tier2'),
+        document.getElementById('tier3'),
+      ];
+      tiers.forEach(t => { t.className = 'tier-row'; });
+
+      if (count < 100) {
+        tiers[0].classList.add('active');
+        tiers[0].querySelector('span:last-child').innerHTML = '40% 할인 <span class="tier-badge">지금</span>';
+      } else if (count < 200) {
+        tiers[0].classList.add('done');
+        tiers[1].classList.add('active');
+        tiers[1].querySelector('span:last-child').innerHTML = '30% 할인 <span class="tier-badge">지금</span>';
+      } else {
+        tiers[0].classList.add('done');
+        tiers[1].classList.add('done');
+        tiers[2].classList.add('active');
+        tiers[2].querySelector('span:last-child').innerHTML = '20% 할인 <span class="tier-badge">지금</span>';
+      }
+    }
+
+    // ═══════════════════════════════════════════
+    // 4) 사전예약 제출 (reservations 테이블)
+    //    email만 필수, name/phone/gender는 NULL
+    // ═══════════════════════════════════════════
+    async function handlePreorder() {
+      const emailInput = document.getElementById('email');
+      const email = emailInput.value.trim();
+      const btn = document.getElementById('submitBtn');
+
+      if (!email || !email.includes('@')) {
+        alert('올바른 이메일을 입력해 주세요.');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = '처리 중...';
+
+      try {
+        // reservations 테이블 컬럼: name, phone, email, gender
+        // 이메일만 보내고 나머지는 DB default(NULL)
+        const res = await supaFetch('reservations', {
+          method: 'POST',
+          prefer: 'return=minimal',
+          body: { email: email },
+        });
+
+        if (res.ok) {
+          // 클릭 트래킹 (예약 완료 = form_submit)
+          trackClick('form_submit');
+          currentCount++;
+          updateUI(currentCount);
+          document.getElementById('successModal').classList.add('active');
+          emailInput.value = '';
+        } else {
+          const err = await res.json();
+          if (res.status === 409 || err.code === '23505') {
+            alert('이미 사전예약된 이메일입니다!');
+          } else {
+            console.error('Supabase 오류:', err);
+            alert('오류가 발생했습니다. 다시 시도해 주세요.');
+          }
+        }
+      } catch (e) {
+        console.error('제출 오류:', e);
+        alert('네트워크 오류가 발생했습니다. 다시 시도해 주세요.');
+      }
+
+      btn.disabled = false;
+      btn.textContent = '사전예약 신청 →';
+    }
+
+    // ═══════════════════════════════════════════
+    // Toast 알림 (사회적 증거)
+    // ═══════════════════════════════════════════
+    const fakeNames = [
+      '김*현', '이*영', '박*수', '최*아', '정*호',
+      '강*민', '윤*진', '장*우', '한*은', '오*준',
+      '서*연', '임*빈', '송*라', '신*혁', '배*솔'
+    ];
+    const fakeTimestamps = ['방금 전', '1분 전', '2분 전', '3분 전', '5분 전'];
+
+    function showToast() {
+      const container = document.getElementById('toastContainer');
+      const name = fakeNames[Math.floor(Math.random() * fakeNames.length)];
+      const time = fakeTimestamps[Math.floor(Math.random() * fakeTimestamps.length)];
+
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerHTML = `<span class="toast-dot"></span>${name}님이 사전예약했습니다 · ${time}`;
+
+      container.appendChild(toast);
+      setTimeout(() => toast.classList.add('show'), 50);
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 400);
+      }, 4000);
+    }
+
+    function scheduleToast() {
+      const delay = 15000 + Math.random() * 15000;
+      setTimeout(() => { showToast(); scheduleToast(); }, delay);
+    }
+
+    // ═══════════════════════════════════════════
+    // Countdown (7일 후 마감)
+    // ═══════════════════════════════════════════
+    const deadline = new Date();
+    deadline.setDate(deadline.getDate() + 7);
+    deadline.setHours(23, 59, 59, 0);
+
+    function updateCountdown() {
+      const diff = deadline - new Date();
+      if (diff <= 0) return;
+      document.getElementById('cd-days').textContent = String(Math.floor(diff / (1000*60*60*24))).padStart(2,'0');
+      document.getElementById('cd-hours').textContent = String(Math.floor((diff % (1000*60*60*24)) / (1000*60*60))).padStart(2,'0');
+      document.getElementById('cd-mins').textContent = String(Math.floor((diff % (1000*60*60)) / (1000*60))).padStart(2,'0');
+      document.getElementById('cd-secs').textContent = String(Math.floor((diff % (1000*60)) / 1000)).padStart(2,'0');
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ═══════════════════════════════════════════
+    // Scroll Reveal & Floating CTA
+    // ═══════════════════════════════════════════
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    const heroEl = document.getElementById('hero');
+    const floatingEl = document.getElementById('floatingCta');
+    const floatObs = new IntersectionObserver(([entry]) => {
+      floatingEl.classList.toggle('show', !entry.isIntersecting);
+    }, { threshold: 0 });
+    floatObs.observe(heroEl);
+
+    // ═══════════════════════════════════════════
+    // CTA 클릭 핸들러 (트래킹 포함)
+    // ═══════════════════════════════════════════
+    function scrollToForm(buttonName) {
+      trackClick(buttonName || 'unknown_cta');
+      document.getElementById('preorder-form').scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => document.getElementById('email').focus(), 600);
+    }
+
+    function closeModal() {
+      document.getElementById('successModal').classList.remove('active');
+    }
+
+    // ═══════════════════════════════════════════
+    // 초기화
+    // ═══════════════════════════════════════════
+    trackVisit();
+    fetchCount();
+    setTimeout(() => { showToast(); scheduleToast(); }, 8000);
+  </script>
 </body>
 </html>

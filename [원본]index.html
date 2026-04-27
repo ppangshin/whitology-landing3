@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WHITOLOGY — 너 이렇게 데이트 할 거야?</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans KR', sans-serif; background: #f5f0e8; color: #111; overflow-x: hidden; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: #111;
+    color: #f5f0e8;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    padding: 80px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-right {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .product-img-wrap {
+    position: relative;
+    width: 380px;
+    height: 560px;
+  }
+  .product-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .img-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #1e1e1e;
+    border: 1px dashed rgba(255,255,255,0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  .img-placeholder .ph-icon { font-size: 32px; opacity: 0.4; }
+  .img-placeholder .ph-label { font-size: 11px; letter-spacing: 2px; color: rgba(255,255,255,0.25); text-align: center; line-height: 1.8; }
+  .hero-sticker-1 {
+    position: absolute; top: 60px; right: 20px;
+    background: #d4f500; color: #111;
+    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
+    font-size: 11px; padding: 6px 12px;
+    transform: rotate(8deg); letter-spacing: 1px; z-index: 3;
+  }
+  .hero-sticker-2 {
+    position: absolute; bottom: 80px; left: -10px;
+    background: #ff3b3b; color: #fff;
+    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
+    font-size: 11px; padding: 6px 12px;
+    transform: rotate(-6deg); letter-spacing: 1px; z-index: 3;
+  }
+  .hero-bg-circle {
+    position: absolute; width: 500px; height: 500px; border-radius: 50%;
+    background: rgba(212,245,0,0.05);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 4px 12px; font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 32px;
+  }
+  .hero h1 {
+    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
+    font-weight: 900;
+    font-size: clamp(32px, 4.5vw, 56px);
+    line-height: 1.2; letter-spacing: 0px; margin-bottom: 24px;
+  }
+  .hero h1 .accent { color: #d4f500; }
+  .hero-sub {
+    font-size: 15px; line-height: 1.8;
+    color: rgba(255,255,255,0.55);
+    max-width: 340px; margin-bottom: 48px;
+  }
+  .cta-btn {
+    display: inline-block; background: #d4f500; color: #111;
+    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
+    font-weight: 800;
+    font-size: 17px; letter-spacing: 0.5px; padding: 18px 36px;
+    border: none; cursor: pointer;
+    transform: rotate(-1.5deg); transition: transform 0.2s;
+    text-decoration: none;
+  }
+  .cta-btn:hover { transform: rotate(0.5deg) scale(1.03); }
+
+  /* ── PROBLEM ── */
+  .section-problem {
+    background: #f5f0e8;
+    padding: 100px 48px;
+    display: grid;
+    grid-template-columns: 1fr 0.45fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .sticker-red {
+    display: inline-block; background: #ff3b3b; color: #fff;
+    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
+    font-size: 12px; padding: 5px 12px;
+    transform: rotate(-2deg); margin-bottom: 24px; letter-spacing: 1px;
+  }
+  .section-problem h2 {
+    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
+    font-size: clamp(26px, 3.5vw, 42px);
+    line-height: 1.25; letter-spacing: 0px; margin-bottom: 32px;
+  }
+  .problem-body {
+    font-size: 16px; line-height: 1.9; color: #444;
+    border-left: 3px solid #111; padding-left: 24px;
+  }
+  .problem-img-wrap { position: relative; }
+  .problem-img-box {
+    width: 100%; aspect-ratio: 9/16;
+    background: #e8e3d8;
+    border: 1px dashed rgba(0,0,0,0.12);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 12px;
+    position: relative; overflow: hidden;
+  }
+  .problem-img-box img { width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0; }
+  .problem-img-box .ph-icon { font-size: 28px; opacity: 0.2; }
+  .problem-img-box .ph-label { font-size: 11px; letter-spacing: 2px; color: rgba(0,0,0,0.2); text-align: center; line-height: 1.8; }
+  .img-caption-tag {
+    position: absolute; bottom: -12px; right: -12px;
+    background: #111; color: #f5f0e8;
+    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
+    font-size: 12px; padding: 8px 16px;
+    transform: rotate(2deg); letter-spacing: 1px; z-index: 2;
+  }
+
+  /* ── FEATURES ── */
+  .section-features { background: #111; color: #f5f0e8; padding: 100px 48px; }
+  .section-features .eyebrow {
+    font-size: 11px; letter-spacing: 4px;
+    color: rgba(255,255,255,0.35); text-transform: uppercase; margin-bottom: 20px;
+  }
+  .section-features .headline {
+    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
+    font-size: clamp(24px,3.5vw,40px); letter-spacing:0px; line-height:1.25; margin-bottom: 60px;
+  }
+  .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+  .feature-item { background: #1a1a1a; padding: 40px 32px; position: relative; overflow: hidden; }
+  .feature-item:nth-child(2) { background: #d4f500; color: #111; }
+  .feature-num {
+    font-family: 'Noto Sans KR', sans-serif; font-weight: 800; font-size: 80px;
+    color: rgba(255,255,255,0.05); position: absolute; top: 16px; right: 24px; line-height: 1;
+  }
+  .feature-item:nth-child(2) .feature-num { color: rgba(0,0,0,0.06); }
+  .feature-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 12px; }
+  .feature-item:nth-child(2) .feature-label { color: rgba(0,0,0,0.35); }
+  .feature-title { font-family: 'Noto Sans KR', sans-serif; font-weight: 800; font-size: 22px; line-height: 1.2; margin-bottom: 12px; }
+  .feature-desc { font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.45); }
+  .feature-item:nth-child(2) .feature-desc { color: rgba(0,0,0,0.5); }
+  .badge-absurd {
+    display: inline-block; background: #ff3b3b; color: #fff;
+    font-size: 9px; letter-spacing: 1px; padding: 2px 7px; margin-left: 6px; vertical-align: middle;
+  }
+
+  /* ── SHOWCASE ── */
+  .section-showcase {
+    background: #f5f0e8; padding: 100px 48px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+  }
+  .showcase-img-col { display: flex; gap: 16px; align-items: flex-end; }
+  .showcase-img-main {
+    flex: 2; aspect-ratio: 3/4;
+    background: #e0dbd0;
+    border: 1px dashed rgba(0,0,0,0.12);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+    position: relative; overflow: hidden;
+  }
+  .showcase-img-main img { width:100%; height:100%; object-fit: cover; position: absolute; top:0; left:0; }
+  .showcase-img-sub {
+    flex: 1; aspect-ratio: 1/1; background: #d4f500;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    position: relative; overflow: hidden; margin-bottom: 40px;
+  }
+  .showcase-img-sub img { width:100%; height:100%; object-fit: cover; position: absolute; top:0; left:0; }
+  .showcase-img-sub .ph-icon { font-size: 20px; opacity: 0.3; }
+  .showcase-img-sub .ph-label { font-size: 10px; letter-spacing: 1px; color: rgba(0,0,0,0.3); text-align: center; }
+  .showcase-main-icon { font-size: 28px; opacity: 0.2; }
+  .showcase-main-ph { font-size: 11px; letter-spacing: 2px; color: rgba(0,0,0,0.2); text-align: center; line-height: 1.8; }
+  .showcase-text h2 {
+    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
+    font-size: clamp(26px,3.5vw,42px); letter-spacing: 0px; line-height: 1.25; margin-bottom: 24px;
+  }
+  .showcase-text p { font-size: 15px; line-height: 1.9; color: #555; margin-bottom: 32px; }
+  .stamp-inline {
+    width: 84px; height: 84px;
+    border: 2px solid #111; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
+    font-size: 12px; line-height: 1.4; color: #111;
+    transform: rotate(-8deg); letter-spacing: 0.5px;
+  }
+
+  /* ── CLAIM ── */
+  .section-claim { background: #d4f500; padding: 100px 48px; position: relative; overflow: hidden; }
+  .claim-bg {
+    position: absolute; font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
+    font-size: 260px; color: rgba(0,0,0,0.04);
+    top: -20px; left: -20px; line-height: 1; pointer-events: none;
+  }
+  .section-claim h2 {
+    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
+    font-size: clamp(32px,4.5vw,56px); line-height: 1.2;
+    letter-spacing: 0px; color: #111;
+    position: relative; z-index: 1; max-width: 640px;
+  }
+  .section-claim .claim-note {
+    font-size: 13px; color: rgba(0,0,0,0.4);
+    margin-top: 24px; position: relative; z-index: 1;
+  }
+  .stamp-claim {
+    position: absolute; right: 60px; bottom: 60px;
+    width: 100px; height: 100px;
+    border: 3px solid #111; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
+    font-size: 13px; line-height: 1.3; color: #111;
+    transform: rotate(12deg); letter-spacing: 0.5px;
+  }
+
+  /* ── CTA ── */
+  .section-cta { background: #111; color: #f5f0e8; padding: 120px 48px; text-align: center; }
+  .section-cta h2 {
+    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
+    font-size: clamp(28px,4vw,50px); letter-spacing: 0px; margin-bottom: 16px; line-height: 1.2;
+  }
+  .section-cta .sub { font-size: 15px; color: rgba(255,255,255,0.45); margin-bottom: 48px; line-height: 1.8; }
+  .email-row { display: flex; gap: 0; max-width: 480px; margin: 0 auto 16px; }
+  .email-row input {
+    flex: 1; background: #1a1a1a;
+    border: 1px solid rgba(255,255,255,0.12); border-right: none;
+    color: #f5f0e8; font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
+    font-size: 14px; padding: 16px 20px; outline: none;
+  }
+  .email-row input::placeholder { color: rgba(255,255,255,0.2); }
+  .email-row button {
+    background: #d4f500; color: #111; border: none;
+    font-family: 'Noto Sans KR', sans-serif; font-weight: 800;
+    font-size: 14px; padding: 16px 24px; cursor: pointer; transition: transform 0.15s;
+  }
+  .email-row button:hover { transform: rotate(-1deg) scale(1.02); }
+  .cta-fine { font-size: 11px; color: rgba(255,255,255,0.18); letter-spacing: 1px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0a0a0a; padding: 28px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-brand { font-family: 'Noto Sans KR', sans-serif; font-weight: 800; font-size: 18px; color: rgba(255,255,255,0.25); letter-spacing: 3px; }
+  .footer-note { font-size: 11px; color: rgba(255,255,255,0.12); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+
+    /* HERO */
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 64px 24px 32px; order: 1; }
+    .hero h1 { font-size: 36px; }
+    .hero-sub { font-size: 14px; margin-bottom: 32px; }
+    .cta-btn { font-size: 15px; padding: 14px 28px; }
+    .hero-right { order: 2; height: 300px; }
+    .product-img-wrap { width: 160px; height: 240px; }
+    .hero-sticker-1 { font-size: 10px; top: 20px; right: 12px; }
+    .hero-sticker-2 { font-size: 10px; bottom: 40px; left: 0; }
+
+    /* PROBLEM */
+    .section-problem { grid-template-columns: 1fr; padding: 56px 24px 0; gap: 32px; }
+    .problem-text { padding: 0; }
+    .section-problem h2 { font-size: 28px; }
+    .problem-body { font-size: 14px; }
+    .problem-img-wrap { width: 100%; margin: 0 -24px; width: calc(100% + 48px); }
+    .problem-img-box { aspect-ratio: 3/4; border: none; }
+    .problem-img-box img { object-fit: cover; object-position: center; }
+    .img-caption-tag { bottom: 12px; right: 12px; }
+
+    /* FEATURES */
+    .section-features { padding: 56px 24px; }
+    .section-features .headline { font-size: 26px; margin-bottom: 40px; }
+    .features-grid { grid-template-columns: 1fr; gap: 2px; }
+    .feature-item { padding: 32px 24px; }
+    .feature-num { font-size: 56px; }
+    .feature-title { font-size: 19px; }
+    .feature-desc { font-size: 13px; }
+
+    /* SHOWCASE */
+    .section-showcase { grid-template-columns: 1fr; padding: 56px 24px; gap: 32px; }
+    .showcase-img-col { display: flex; flex-direction: column; gap: 12px; align-items: stretch; }
+    .showcase-img-main { flex: none; width: 100%; aspect-ratio: 4/3; }
+    .showcase-img-sub { flex: none; width: 100%; aspect-ratio: 16/9; margin-bottom: 0; }
+    .showcase-text h2 { font-size: 30px; }
+    .showcase-text p { font-size: 14px; }
+
+    /* CLAIM */
+    .section-claim { padding: 56px 24px 80px; }
+    .section-claim h2 { font-size: 34px; }
+    .claim-bg { font-size: 160px; }
+    .stamp-claim { right: 20px; bottom: 20px; width: 80px; height: 80px; font-size: 11px; }
+
+    /* CTA */
+    .section-cta { padding: 72px 24px; }
+    .section-cta h2 { font-size: 30px; }
+    .section-cta .sub { font-size: 13px; margin-bottom: 32px; }
+    .email-row { flex-direction: column; max-width: 100%; }
+    .email-row input { border-right: 1px solid rgba(255,255,255,0.12); border-bottom: none; font-size: 14px; padding: 14px 16px; }
+    .email-row button { font-size: 15px; padding: 14px 20px; }
+
+    /* FOOTER */
+    footer { flex-direction: column; gap: 10px; padding: 24px; text-align: center; }
+    .footer-brand { font-size: 15px; }
+  }
+
+  /* iPhone SE 등 소형 */
+  @media (max-width: 375px) {
+    .hero h1 { font-size: 30px; }
+    .hero-left { padding: 48px 20px 28px; }
+    .section-problem h2 { font-size: 24px; }
+    .section-features .headline { font-size: 22px; }
+    .section-claim h2 { font-size: 28px; }
+    .section-cta h2 { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">구강 케어 디바이스</div>
+    <h1><span class="accent">누런 치아</span><br>때문에 고민?</h1>
+    <p class="hero-sub">데이트할 때 웃는 게 신경 쓰였다면,<br>이미 필요한 거야.</p>
+    <a href="#cta" class="cta-btn">나 관심 있음 →</a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-bg-circle"></div>
+    <div class="product-img-wrap">
+      <!--
+        ✏️ 제품 이미지 교체 방법:
+        아래 img 태그의 주석을 풀고 src에 이미지 경로를 넣으세요.
+        그 아래 .img-placeholder div는 삭제하세요.
+        권장: 세로형 누끼 PNG (투명 배경)
+      -->
+      <img src="images/before3.png" alt="Whitology 디바이스" style="width:100%;height:100%;object-fit:cover;display:block;">
+
+      <div class="hero-sticker-2">진짜임</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="section-problem">
+  <div class="problem-text">
+    <div class="sticker-red">현실 직시</div>
+    <h2>회사 다니는<br>우리 언니도<br>치아색 때문에<br>고민한대.</h2>
+    <p class="problem-body">
+      스킨케어는 10단계인데,<br>
+      구강 케어는 아직도 칫솔 하나야?<br><br>
+      피부에 쓰는 돈의 1%도 안 쓰면서<br>
+      치아가 예뻐지길 바라는 거,<br>
+      솔직히 좀 웃기지 않아요?
+    </p>
+  </div>
+  <div class="problem-img-wrap">
+    <!--
+      ✏️ 라이프스타일 이미지 교체 방법:
+      아래 img 태그의 주석을 풀고 src에 이미지 경로를 넣으세요.
+      권장: 세로형, 표정 있는 인물 컷
+    -->
+    <div class="problem-img-box">
+      <img src="images/before.png" alt="Before After">
+    </div>
+    <div class="img-caption-tag">치아 때문에?</div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section-features">
+  <p class="eyebrow">Whitology가 바꿔줄게</p>
+  <div class="headline">진동, 젤, 미백, 잇몸.<br>한 번에.</div>
+  <div class="features-grid">
+    <div class="feature-item" style="position:relative;overflow:hidden;">
+      <img src="images/hero-device.jpeg" alt="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0.15;">
+      <div style="position:relative;z-index:1;">
+        <div class="feature-num">01</div>
+        <div class="feature-label">Sonic Care</div>
+        <div class="feature-title">초음파 진동</div>
+        <div class="feature-desc">칫솔이 못 간 곳까지 쑤셔드림.<br>아프진 않음. 진짜로.</div>
+      </div>
+    </div>
+    <div class="feature-item" style="position:relative;overflow:hidden;">
+      <img src="images/whitening-pen.jpeg" alt="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0.2;">
+      <div style="position:relative;z-index:1;">
+        <div class="feature-num">02</div>
+        <div class="feature-label">Gel Infusion</div>
+        <div class="feature-title">구강 젤 침투 <span class="badge-absurd">마법아님</span></div>
+        <div class="feature-desc">바르면 스며드는 기술.<br>마법 같지만 기술임.</div>
+      </div>
+    </div>
+    <div class="feature-item" style="position:relative;overflow:hidden;">
+      <img src="images/gum-care.jpeg" alt="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0.2;">
+      <div style="position:relative;z-index:1;">
+        <div class="feature-num">03</div>
+        <div class="feature-label">Whitening</div>
+        <div class="feature-title">미백 케어</div>
+        <div class="feature-desc">치아가 점점 밝아지는 기분이 아니라<br>실제로 밝아짐.</div>
+      </div>
+    </div>
+    <div class="feature-item" style="position:relative;overflow:hidden;">
+      <img src="images/fluoride-care.jpeg" alt="" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0.2;">
+      <div style="position:relative;z-index:1;">
+        <div class="feature-num">04</div>
+        <div class="feature-label">Gum Care</div>
+        <div class="feature-title">잇몸 케어</div>
+        <div class="feature-desc">잇몸도 케어 받고 싶었잖아요.<br>사실.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWCASE -->
+<section class="section-showcase">
+  <div class="showcase-img-col">
+    <!--
+      ✏️ 큰 이미지: 제품 사용 장면
+      <img src="images/usage.jpg" alt="">로 교체
+    -->
+    <div class="showcase-img-main">
+      <img src="images/product-set.jpeg" alt="Whitology 제품 세트">
+    </div>
+    <div class="showcase-img-sub">
+      <img src="images/app-screen.jpeg" alt="Whitology 앱">
+    </div>
+  </div>
+  <div class="showcase-text">
+    <h2>이걸 쓰면<br>어떻게<br>되냐고요?</h2>
+    <p>치아가 빛납니다.<br>거짓말 같지만 진짜입니다.<br>진짜인지 모르겠으면 사전 신청하세요.</p>
+    <div class="stamp-inline">진짜임<br>아님<br>말고</div>
+  </div>
+</section>
+
+<!-- CLAIM -->
+<section class="section-claim">
+  <div class="claim-bg">!!</div>
+  <h2>먼저 아는<br>사람이<br>먼저 써.</h2>
+  <p class="claim-note">출시 전 얼리어답터 사전 신청 받는 중. 신청자에게만 런칭 혜택 드려요.</p>
+  <div class="stamp-claim">얼리<br>어답터<br>혜택</div>
+</section>
+
+<!-- CTA -->
+<section id="cta" class="section-cta">
+  <h2>나 먼저<br>알고 싶음.</h2>
+  <p class="sub">이메일 남기면 출시 소식 + 얼리버드 혜택 먼저 드려요.<br>스팸은 안 보냄. 약속.</p>
+  <!--
+    ✏️ 이메일 폼 연동 방법:
+    Mailchimp: action에 Mailchimp embed form URL 넣기
+    Google Forms: 아래 form 전체를 Google Forms embed iframe으로 교체
+  -->
+  <form class="email-row" onsubmit="handleSubmit(event)">
+    <input type="email" id="email-input" placeholder="이메일 주소 입력" required />
+    <button type="submit">신청하기 →</button>
+  </form>
+  <p class="cta-fine" id="submit-msg">런칭 소식만 보내드립니다</p>
+</section>
+
+<footer>
+  <div class="footer-brand">WHITOLOGY</div>
+  <div class="footer-note">© 2026 WHITOLOGY. ALL RIGHTS RESERVED.</div>
+</footer>
+
+<script>
+  // 이메일 제출 처리 (현재: 로컬 확인용)
+  // Mailchimp 연동 시 이 함수 대신 form action URL 사용
+  function handleSubmit(e) {
+    e.preventDefault();
+    const email = document.getElementById('email-input').value;
+    if (email) {
+      document.getElementById('submit-msg').textContent = '✓ 신청 완료! 런칭 소식 보내드릴게요.';
+      document.getElementById('submit-msg').style.color = '#d4f500';
+      document.getElementById('email-input').value = '';
+    }
+  }
+
+  // 히어로 CTA → CTA 섹션 스크롤
+  document.querySelector('a.cta-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('cta').scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
